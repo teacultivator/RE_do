@@ -1,28 +1,27 @@
 from langchain_core.messages import HumanMessage
 from graph.builder import build_graph
 
-graph = build_graph()
 
-# Use a fixed thread_id to simulate one conversation
-config = {"configurable": {"thread_id": "demo-user"}}
+def main() -> None:
+    graph = build_graph()
+    config = {"configurable": {"thread_id": "demo-user"}}
 
-# Turn 1
-result1 = graph.invoke(
-    {"messages": [HumanMessage(content="Flights from Paris to Delhi")]},
-    config=config,
-)
-print(result1["messages"][-1].content)
+    print("Type 'exit' to quit.\n")
+    while True:
+        text = input("You: ").strip()
+        if not text:
+            continue
+        if text.lower() in {"exit", "quit"}:
+            break
 
-# Turn 2 (same thread_id, new user message)
-result2 = graph.invoke(
-    {"messages": [HumanMessage(content="Also, make them non-stop")]},
-    config=config,
-)
-print(result2["messages"][-1].content)
+        result = graph.invoke(
+            {"messages": [HumanMessage(content=text)]},
+            config=config,
+        )
 
-# Turn 3 (same thread_id again)
-result3 = graph.invoke(
-    {"messages": [HumanMessage(content="Actually, for next Monday")]},
-    config=config,
-)
-print(result3["messages"][-1].content)
+        ai_msg = result["messages"][-1]
+        print("Bot:", ai_msg.content)
+
+
+if __name__ == "__main__":
+    main()

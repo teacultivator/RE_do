@@ -14,7 +14,17 @@ def result_node(state: State) -> Dict:
     user_messages = _get_user_messages(messages)
     turn = len(user_messages)
 
-    last_user = user_messages[-1].content if user_messages else "nothing yet"
-    reply = f"This is turn {turn}. You just said: {last_user}"
+    if user_messages:
+        last_user = user_messages[-1].content
+    else:
+        last_user = "nothing yet"
+
+    if len(user_messages) >= 2:
+        prev_user = user_messages[-2].content
+        prev_part = f"Previously you said: {prev_user}"
+    else:
+        prev_part = "No previous user message."
+
+    reply = f"This is turn {turn}. You just said: {last_user}. {prev_part}"
 
     return {"messages": [AIMessage(content=reply)]}
