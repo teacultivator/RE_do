@@ -20,5 +20,7 @@ class State(TypedDict, total=False):
     final_answer: str
     needs: str
     next_action: str
+    needs_refresh: bool
+    followup_request: str
 
 

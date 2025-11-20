@@ -1,3 +1,4 @@
+from tkinter import N
 from typing import Dict, List
 import json
 
@@ -36,9 +37,6 @@ def result_node(state: State) -> Dict:
         "destination_country": state.get("destination_country"),
         "needs": state.get("needs"),
         "next_action": state.get("next_action"),
-        "flight_count": len(state.get("flight_options") or []),
-        "bus_count": len(state.get("bus_options") or []),
-        "train_count": len(state.get("train_options") or []),
     }
 
     missing = []
@@ -48,23 +46,26 @@ def result_node(state: State) -> Dict:
         missing.append("destination city")
     if not state.get("date"):
         missing.append("date")
-    if not state.get("time"):
-        missing.append("time")
-    if not state.get("origin_country"):
-        missing.append("origin country")
-    if not state.get("destination_country"):
-        missing.append("destination country")
     if not state.get("transport_mode"):
         missing.append("transport mode (flight/bus/train)")
-
+    elif state.get("transport_mode") == "bus" or "train":
+        if not state.get("time"):
+            missing.append("time")
     if missing:
         clarify_text = "I still need: " + ", ".join(missing)
     else:
         clarify_text = "I have all core fields; ready to show results once agents are implemented."
 
+    transport_view = {
+        "flights": state.get("flight_options") or [],
+        "buses": state.get("bus_options") or [],
+        "trains": state.get("train_options") or [],
+    }
+
     reply = (
         f"This is turn {turn}. You just said: {last_user}. {prev_part}\n"
         f"Router next_action={state.get('next_action')!r}. {clarify_text}\n"
+        f"Transport results (as collected so far): {json.dumps(transport_view, ensure_ascii=False)}\n"
         f"Parsed state: {json.dumps(state_view, ensure_ascii=False)}"
     )
 

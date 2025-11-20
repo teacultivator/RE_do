@@ -24,8 +24,21 @@ def _decide_action(state: State) -> RouterAction:
     destination = state.get("destination")
     date = state.get("date")
     mode = state.get("transport_mode")
+    needs_refresh = state.get("needs_refresh", False)
+    origin_country = state.get("origin_country")
+    destination_country = state.get("destination_country")
 
     if not origin or not destination or not date:
+        return "clarify"
+
+    if not needs_refresh:
+        return "clarify"
+
+    if not mode:
+        if origin_country and destination_country:
+            different_countries = origin_country.strip().lower() != destination_country.strip().lower()
+            if different_countries:
+                return "show_flights"
         return "clarify"
 
     if mode == "flight":
