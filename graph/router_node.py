@@ -1,7 +1,5 @@
-from typing import Literal
-
+from typing import Literal, Optional
 from .state import State
-
 
 Decision = Literal[
     "clarify_or_respond",
@@ -19,14 +17,22 @@ RouterAction = Literal[
 ]
 
 
+def _infer_mode_from_countries(state: State) -> Optional[str]:
+    origin_country = state.get("origin_country")
+    destination_country = state.get("destination_country")
+    if not origin_country or not destination_country:
+        return None
+    if origin_country.strip().lower() != destination_country.strip().lower():
+        return "flight"
+    return None
+
+
 def _decide_action(state: State) -> RouterAction:
     origin = state.get("origin")
     destination = state.get("destination")
     date = state.get("date")
     mode = state.get("transport_mode")
     needs_refresh = state.get("needs_refresh", False)
-    origin_country = state.get("origin_country")
-    destination_country = state.get("destination_country")
 
     if not origin or not destination or not date:
         return "clarify"
@@ -35,10 +41,9 @@ def _decide_action(state: State) -> RouterAction:
         return "clarify"
 
     if not mode:
-        if origin_country and destination_country:
-            different_countries = origin_country.strip().lower() != destination_country.strip().lower()
-            if different_countries:
-                return "show_flights"
+        inferred_mode = _infer_mode_from_countries(state)
+        if inferred_mode == "flight":
+            return "show_flights"
         return "clarify"
 
     if mode == "flight":
@@ -53,7 +58,12 @@ def _decide_action(state: State) -> RouterAction:
 
 def router_node(state: State) -> dict:
     action = _decide_action(state)
-    return {"next_action": action}
+    updates = {"next_action": action}
+    if action == "show_flights" and not state.get("transport_mode"):
+        inferred_mode = _infer_mode_from_countries(state)
+        if inferred_mode:
+            updates["transport_mode"] = inferred_mode
+    return updates
 
 
 def route_next(state: State) -> Decision:

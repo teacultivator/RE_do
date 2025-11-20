@@ -40,17 +40,17 @@ def result_node(state: State) -> Dict:
     }
 
     missing = []
+    mode = state.get("transport_mode")
     if not state.get("origin"):
         missing.append("origin city")
     if not state.get("destination"):
         missing.append("destination city")
     if not state.get("date"):
         missing.append("date")
-    if not state.get("transport_mode"):
+    if not mode:
         missing.append("transport mode (flight/bus/train)")
-    elif state.get("transport_mode") == "bus" or "train":
-        if not state.get("time"):
-            missing.append("time")
+    if mode in {"bus", "train"} and not state.get("time"):
+        missing.append("time")
     if missing:
         clarify_text = "I still need: " + ", ".join(missing)
     else:
@@ -63,10 +63,10 @@ def result_node(state: State) -> Dict:
     }
 
     reply = (
-        f"This is turn {turn}. You just said: {last_user}. {prev_part}\n"
+        # f"This is turn {turn}. You just said: {last_user}. {prev_part}\n"
         f"Router next_action={state.get('next_action')!r}. {clarify_text}\n"
-        f"Transport results (as collected so far): {json.dumps(transport_view, ensure_ascii=False)}\n"
-        f"Parsed state: {json.dumps(state_view, ensure_ascii=False)}"
+        # f"Transport results (as collected so far): {json.dumps(transport_view, ensure_ascii=False)}\n"
+        # f"Parsed state: {json.dumps(state_view, ensure_ascii=False)}"
     )
 
     return {"messages": [AIMessage(content=reply)]}
