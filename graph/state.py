@@ -11,11 +11,14 @@ class State(TypedDict, total=False):
     destination: str
     date: str
     transport_mode: str
-    constraints: Dict[str, Any]
+    time: str
+    origin_country: str
+    destination_country: str
     flight_options: List[Dict[str, Any]]
     bus_options: List[Dict[str, Any]]
     train_options: List[Dict[str, Any]]
     final_answer: str
     needs: str
+    next_action: str
 
 
