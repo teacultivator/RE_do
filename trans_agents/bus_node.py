@@ -55,27 +55,29 @@ def bus_node(state: State) -> Dict:
         formatted_routes = [format_bus_route(route) for route in routes]
         
         # Store in state
-        state["bus_options"] = {
+        state["bus_options"] = formatted_routes  # Store just the list of routes
+        state["bus_metadata"] = {  # Store metadata separately
             "origin": origin,
             "destination": destination,
             "departure_time": departure_time.isoformat(),
-            "routes": formatted_routes,
             "last_updated": datetime.now().isoformat()
         }
         
         print(f"✅ Found {len(formatted_routes)} bus routes")
+        return {
+            "bus_options": formatted_routes,
+            "bus_metadata": state["bus_metadata"],
+            "needs_refresh": False,
+        }
         
     except Exception as e:
         error_msg = f"❌ Error searching for buses: {str(e)}"
         print(f"\n{error_msg}")
         state["bus_error"] = str(e)
-        state["bus_options"] = {
-            "routes": [],
-            "error": str(e),
-            "last_updated": datetime.now().isoformat()
+        state["bus_options"] = []  # Empty list on error
+        
+        return {
+            "bus_options": [],
+            "bus_error": str(e),
+            "needs_refresh": False,
         }
-
-    return {
-        "bus_options": state.get("bus_options", {"routes": []}),
-        "needs_refresh": False,
-    }
