@@ -147,7 +147,38 @@ def process_bus_route(route: Dict) -> Dict:
     # Calculate total fare if available
     advisory = route.get("travelAdvisory", {})
     fare = advisory.get("transitFare", {})
-    total_fare = f"{fare.get('currencyCode', '')} {fare.get('units', 0) + fare.get('nanos', 0) / 1e9}".strip()
+    
+    # Get origin and destination for currency detection
+    origin = legs[0].get("startAddress", "") if legs and isinstance(legs, list) and len(legs) > 0 else ""
+    destination = legs[-1].get("endAddress", "") if legs and isinstance(legs, list) and len(legs) > 0 else ""
+    
+    # Determine currency based on location
+    origin_country, default_currency = _get_country_currency(origin)
+    dest_country, _ = _get_country_currency(destination)
+    
+    # If origin and destination are in different countries, prefer the origin's currency
+    fare_currency = fare.get('currencyCode', default_currency)
+    
+    # Extract fare amount
+    fare_units = fare.get('units', 0)
+    fare_nanos = fare.get('nanos', 0)
+    
+    # Calculate total fare in the smallest unit (e.g., paise for INR)
+    try:
+        total_fare = float(fare_units) + (float(fare_nanos) / 1e9)
+    except (TypeError, ValueError):
+        total_fare = 0.0
+    
+    # Format fare string with the appropriate currency symbol
+    if total_fare > 0:
+        if fare_currency == 'INR':
+            fare_str = f"₹{total_fare:,.2f}"
+        elif fare_currency == 'USD':
+            fare_str = f"${total_fare:,.2f}"
+        else:
+            fare_str = f"{fare_currency} {total_fare:,.2f}"
+    else:
+        fare_str = "Fare not available"
     
     # Process segments
     segments = []
@@ -188,11 +219,13 @@ def process_bus_route(route: Dict) -> Dict:
     return {
         "segments": segments,
         "total_duration": duration,
-        "total_fare": total_fare if total_fare != "0" else "Fare not available",
+        "total_fare": total_fare,  # Numeric value for calculations
+        "fare_display": fare_str,  # Formatted string for display
+        "fare_currency": fare_currency,  # Currency code
         "total_transfers": len(segments) - 1,
         "distance_km": round(route.get("distanceMeters", 0) / 1000, 1),
-        "departure_time": segments[0].get("departure_time", ""),
-        "arrival_time": segments[-1].get("arrival_time", ""),
+        "departure_time": segments[0].get("departure_time", "") if segments else "",
+        "arrival_time": segments[-1].get("arrival_time", "") if segments else "",
     }
 
 
@@ -203,30 +236,23 @@ def process_train_route(route: Dict) -> Dict:
     """
     if not route:
         return {}
-    
-    # Process the route using the bus processor first (shares much of the same structure)
-    processed = process_bus_route(route)
-    if not processed:
+        
+    # Process as bus route first to get common fields
+    train_route = process_bus_route(route)
+    if not train_route:
         return {}
     
-    # Add train-specific processing here if needed
-    # For example, we can extract train numbers or service types
-    segments = processed.get("segments", [])
+    # Ensure transport_type is set to train
+    train_route["transport_type"] = "train"
     
-    # Update segment information for trains
-    for segment in segments:
-        # Rename bus_name to train_name for consistency in the train context
-        if "bus_name" in segment:
-            segment["train_name"] = segment.pop("bus_name")
-        
-        # Add any train-specific fields
-        segment["transport_type"] = "train"
+    # Update segment transport types if they exist
+    if "segments" in train_route and isinstance(train_route["segments"], list):
+        for segment in train_route["segments"]:
+            if "bus_name" in segment:
+                segment["train_name"] = segment.pop("bus_name").replace("Bus", "Train")
+            segment["transport_type"] = "train"
     
-    return {
-        **processed,
-        "segments": segments,
-        "transport_type": "train"
-    }
+    return train_route
 
 
 def get_buses_from_api(origin: str, destination: str, date_time: datetime) -> dict:

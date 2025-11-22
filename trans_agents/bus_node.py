@@ -5,25 +5,47 @@ from datetime import datetime
 
 
 def format_bus_route(route: Dict) -> Dict:
-    """Format a single bus route for display and storage."""
-    if not route:
+    """Format a single bus route for display and storage with enhanced fare handling."""
+    if not route or not isinstance(route, dict):
         return {}
         
-    segments = route.get("segments", [])
-    first_segment = segments[0] if segments else {}
-    last_segment = segments[-1] if segments else {}
-    
-    return {
-        "bus_name": first_segment.get("bus_name", "Unknown Bus"),
-        "departure_time": first_segment.get("departure_time", ""),
-        "arrival_time": last_segment.get("arrival_time", ""),
-        "departure_stop": first_segment.get("departure_stop", ""),
-        "arrival_stop": last_segment.get("arrival_stop", ""),
-        "total_fare": route.get("total_fare", "Fare not available"),
-        "total_transfers": route.get("total_transfers", 0),
-        "num_segments": len(segments),
-        "details": route  # Keep full details in case they're needed
-    }
+    try:
+        segments = route.get("segments", [])
+        if not isinstance(segments, list):
+            segments = []
+            
+        first_segment = segments[0] if segments else {}
+        last_segment = segments[-1] if segments else {}
+        
+        # Extract fare information with better formatting
+        total_fare = route.get("total_fare", "")
+        if not total_fare or total_fare == "0" or total_fare == "0.0":
+            total_fare = "Fare not available"
+        elif isinstance(total_fare, (int, float)):
+            total_fare = f"₹{total_fare:,.2f}"  # Format as currency
+        
+        # Extract fare currency if available
+        fare_currency = ""
+        if isinstance(route.get("fare_currency"), str):
+            fare_currency = route["fare_currency"]
+        
+        return {
+            "bus_name": str(first_segment.get("bus_name", "Unknown Bus")),
+            "departure_time": str(first_segment.get("departure_time", "")),
+            "arrival_time": str(last_segment.get("arrival_time", "")),
+            "departure_stop": str(first_segment.get("departure_stop", "")),
+            "arrival_stop": str(last_segment.get("arrival_stop", "")),
+            "total_fare": total_fare,
+            "fare_currency": fare_currency,
+            "total_transfers": int(route.get("total_transfers", 0)),
+            "num_segments": len(segments),
+            "distance_km": float(route.get("distance_km", 0.0)),
+            "transport_type": "bus",
+            "details": route  # Keep full details in case they're needed
+        }
+    except Exception as e:
+        print(f"⚠️ Error formatting bus route: {str(e)}")
+        return {}
 
 
 def bus_node(state: State) -> Dict:
