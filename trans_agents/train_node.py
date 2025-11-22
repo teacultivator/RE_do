@@ -60,7 +60,7 @@ def train_node(state: State) -> Dict:
         formatted_routes = [format_train_route(route) for route in routes]
         
         # Store in state
-        state["train_search"] = {
+        state["train_options"] = {
             "origin": origin,
             "destination": destination,
             "departure_time": departure_time.isoformat(),
@@ -74,13 +74,13 @@ def train_node(state: State) -> Dict:
         error_msg = f"❌ Error searching for trains: {str(e)}"
         print(f"\n{error_msg}")
         state["train_error"] = str(e)
-        state["train_search"] = {
+        state["train_options"] = {
             "routes": [],
             "error": str(e),
             "last_updated": datetime.now().isoformat()
         }
 
     return {
-        "train_search": state.get("train_search", {"routes": []}),
+        "train_options": state.get("train_options", {"routes": []}),
         "needs_refresh": False,
     }
