@@ -130,3 +130,237 @@ def search_flights(origin_city: str, origin_country:str ,destination_city: str, 
     except Exception as e:
         print(f"An exception occured during/after the API call: {str(e)}")
         return []
+
+
+def process_bus_route(route: Dict) -> Dict:
+    """Process a single bus route from Google Routes API response."""
+    if not route:
+        return {}
+    
+    legs = route.get("legs", [{}])
+    steps = [step for leg in legs for step in leg.get("steps", []) if step.get("travelMode") == "TRANSIT"]
+    
+    if not steps:
+        return {}
+        
+    # Calculate total fare if available
+    advisory = route.get("travelAdvisory", {})
+    fare = advisory.get("transitFare", {})
+    total_fare = f"{fare.get('currencyCode', '')} {fare.get('units', 0) + fare.get('nanos', 0) / 1e9}".strip()
+    
+    # Process segments
+    segments = []
+    for step in steps:
+        transit = step.get("transitDetails", {})
+        if not transit:
+            continue
+            
+        departure_stop = transit.get("stopDetails", {}).get("arrivalStop", {}).get("name", "Unknown Stop")
+        arrival_stop = transit.get("stopDetails", {}).get("departureStop", {}).get("name", "Unknown Stop")
+        
+        segments.append({
+            "bus_name": transit.get("transitLine", {}).get("name", "Unknown Bus"),
+            "departure_stop": departure_stop,
+            "arrival_stop": arrival_stop,
+            "departure_time": transit.get("departureTime", ""),
+            "arrival_time": transit.get("arrivalTime", ""),
+            "num_stops": transit.get("stopCount", 0),
+            "headsign": transit.get("headsign", ""),
+            "transit_line": transit.get("transitLine", {}).get("name", ""),
+        })
+    
+    if not segments:
+        return {}
+    
+    # Calculate total duration in seconds
+    duration_seconds = sum(
+        (datetime.fromisoformat(s["arrival_time"].replace("Z", "")) - 
+         datetime.fromisoformat(s["departure_time"].replace("Z", ""))).total_seconds()
+        for s in segments if s.get("departure_time") and s.get("arrival_time")
+    )
+    
+    # Format duration as H:MM
+    hours = int(duration_seconds // 3600)
+    minutes = int((duration_seconds % 3600) // 60)
+    duration = f"{hours}:{minutes:02d}"
+    
+    return {
+        "segments": segments,
+        "total_duration": duration,
+        "total_fare": total_fare if total_fare != "0" else "Fare not available",
+        "total_transfers": len(segments) - 1,
+        "distance_km": round(route.get("distanceMeters", 0) / 1000, 1),
+        "departure_time": segments[0].get("departure_time", ""),
+        "arrival_time": segments[-1].get("arrival_time", ""),
+    }
+
+
+def process_train_route(route: Dict) -> Dict:
+    """
+    Process a single train route from Google Routes API response.
+    Similar to process_bus_route but with train-specific formatting.
+    """
+    if not route:
+        return {}
+    
+    # Process the route using the bus processor first (shares much of the same structure)
+    processed = process_bus_route(route)
+    if not processed:
+        return {}
+    
+    # Add train-specific processing here if needed
+    # For example, we can extract train numbers or service types
+    segments = processed.get("segments", [])
+    
+    # Update segment information for trains
+    for segment in segments:
+        # Rename bus_name to train_name for consistency in the train context
+        if "bus_name" in segment:
+            segment["train_name"] = segment.pop("bus_name")
+        
+        # Add any train-specific fields
+        segment["transport_type"] = "train"
+    
+    return {
+        **processed,
+        "segments": segments,
+        "transport_type": "train"
+    }
+
+
+def get_buses_from_api(origin: str, destination: str, date_time: datetime) -> dict:
+    """
+    Fetch bus routes between origin and destination from Google Routes API.
+    Returns: Processed bus routes with only essential information
+    """
+    # Get API key from environment variables
+    api_key = os.getenv("GOOGLE_MAPS_API_KEY")
+    if not api_key:
+        raise ValueError("⚠️ GOOGLE_MAPS_API_KEY not found in environment variables. Please add it to your .env file.")
+    
+    url = "https://routes.googleapis.com/directions/v2:computeRoutes"
+    
+    headers = {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": api_key,
+        "X-Goog-FieldMask": (
+            "routes.duration,routes.distanceMeters,"
+            "routes.legs.steps.transitDetails,"
+            "routes.legs.steps.travelMode,"
+            "routes.travelAdvisory.transitFare"
+        )
+    }
+    
+    payload = {
+        "origin": {"address": origin},
+        "destination": {"address": destination},
+        "travelMode": "TRANSIT",
+        "transitPreferences": {
+            "allowedTravelModes": ["BUS"],
+            "routingPreference": "LESS_WALKING"
+        },
+        "departureTime": date_time.isoformat() + "Z",
+        "computeAlternativeRoutes": True,
+    }
+    
+    print(f"🚌 Fetching buses: {origin} → {destination}")
+    print(f"⏰ Departure time: {date_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    try:
+        response = requests.post(url, headers=headers, json=payload, timeout=(10, 30))
+        response.raise_for_status()
+        result = response.json()
+        
+        # Process routes to extract only essential information
+        processed_routes = [process_bus_route(route) for route in result.get("routes", [])]
+        print(f"✅ Processed {len(processed_routes)} bus routes")
+        
+        return {
+            "origin": origin,
+            "destination": destination,
+            "departure_time": date_time.isoformat(),
+            "transport_type": "bus",
+            "routes": processed_routes
+        }
+        
+    except requests.exceptions.Timeout:
+        raise TimeoutError("⏱️ Google Routes API request timed out. The service is slow or unavailable.")
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 403:
+            raise PermissionError("⚠️ API access denied. Check your Google API key.")
+        elif e.response.status_code == 429:
+            raise ConnectionError("⚠️ Rate limit exceeded. Please wait before trying again.")
+        else:
+            error_msg = e.response.text[:500] if hasattr(e, 'response') else str(e)
+            raise ConnectionError(f"⚠️ API error: HTTP {e.response.status_code} - {error_msg}")
+    except Exception as e:
+        raise Exception(f"❌ Error fetching bus routes: {str(e)}")
+
+
+def get_trains_from_api(origin: str, destination: str, date_time: datetime) -> dict:
+    """
+    Fetch train routes between origin and destination from Google Routes API.
+    Returns: Processed train routes with only essential information
+    """
+    # Get API key from environment variables
+    api_key = os.getenv("GOOGLE_MAPS_API_KEY")
+    if not api_key:
+        raise ValueError("⚠️ GOOGLE_MAPS_API_KEY not found in environment variables. Please add it to your .env file.")
+    
+    url = "https://routes.googleapis.com/directions/v2:computeRoutes"
+    
+    headers = {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": api_key,
+        "X-Goog-FieldMask": (
+            "routes.duration,routes.distanceMeters,"
+            "routes.legs.steps.transitDetails,"
+            "routes.legs.steps.travelMode,"
+            "routes.travelAdvisory.transitFare"
+        )
+    }
+    
+    payload = {
+        "origin": {"address": origin},
+        "destination": {"address": destination},
+        "travelMode": "TRANSIT",
+        "transitPreferences": {
+            "allowedTravelModes": ["RAIL"],
+            "routingPreference": "FEWER_TRANSFERS"
+        },
+        "departureTime": date_time.isoformat() + "Z",
+        "computeAlternativeRoutes": True,
+    }
+    
+    print(f"🚆 Fetching trains: {origin} → {destination}")
+    print(f"⏰ Departure time: {date_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    try:
+        response = requests.post(url, headers=headers, json=payload, timeout=(10, 30))
+        response.raise_for_status()
+        result = response.json()
+        
+        # Process routes to extract only essential information
+        processed_routes = [process_train_route(route) for route in result.get("routes", [])]
+        print(f"✅ Processed {len(processed_routes)} train routes")
+        
+        return {
+            "origin": origin,
+            "destination": destination,
+            "departure_time": date_time.isoformat(),
+            "transport_type": "train",
+            "routes": [r for r in processed_routes if r]  # Filter out any empty routes
+        }
+        
+    except requests.exceptions.Timeout:
+        raise TimeoutError("⏱️ Google Routes API request timed out. The service is slow or unavailable.")
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 403:
+            raise PermissionError("⚠️ API access denied. Check your Google API key.")
+        elif e.response.status_code == 429:
+            raise ConnectionError("⚠️ Rate limit exceeded. Please wait before trying again.")
+        else:
+            error_msg = e.response.text[:500] if hasattr(e, 'response') else str(e)
+            raise ConnectionError(f"⚠️ API error: HTTP {e.response.status_code} - {error_msg}")
+    except Exception as e:
+        raise Exception(f"❌ Error fetching train routes: {str(e)}")
