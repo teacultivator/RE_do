@@ -1,5 +1,6 @@
 import os, requests, time, re, json
 from datetime import datetime, date
+from typing import Dict
 import google.generativeai as genai
 from dotenv import load_dotenv, find_dotenv
 import pandas as pd

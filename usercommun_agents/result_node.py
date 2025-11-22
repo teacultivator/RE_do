@@ -1,11 +1,15 @@
 from typing import Dict, List
 import json
 import os
+import pprint
 
 import google.generativeai as genai
 from langchain_core.messages import AIMessage, HumanMessage, BaseMessage
 
 from graph.state import State
+
+# Debug flag - set to False to disable debug prints
+DEBUG_MODE = True
 
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 _MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-2.0-flash")
@@ -17,6 +21,13 @@ def _get_user_messages(messages: List[BaseMessage]) -> List[HumanMessage]:
 
 
 def result_node(state: State) -> Dict:
+    if DEBUG_MODE:
+        print("\n=== DEBUG: Current State ===")
+        # Convert state to dict to ensure we see all elements
+        state_dict = dict(state) if hasattr(state, 'items') else state
+        pprint.pprint(state_dict, width=120, sort_dicts=False, depth=None)
+        print("=== End of State ===\n")
+        
     messages: List[BaseMessage] = list(state.get("messages", []))
     user_messages = _get_user_messages(messages)
     turn = len(user_messages)
@@ -55,8 +66,6 @@ def result_node(state: State) -> Dict:
         missing.append("date")
     if not mode:
         missing.append("transport mode (flight/bus/train)")
-    if mode in {"bus", "train"} and not state.get("time"):
-        missing.append("time")
     if missing:
         clarify_text = "I still need: " + ", ".join(missing)
     else:
@@ -130,24 +139,22 @@ def _format_transport_results(
         f"- Preferred transport mode: {search_info['transport_mode']}\n\n"
         f"Available Transport Options (JSON format):\n"
         f"{json.dumps(transport_data, ensure_ascii=False, indent=2)}\n\n"
-        f"Please analyze these results and provide a clear, user-friendly summary that includes:\n"
-        f"1. A brief introduction confirming the search details\n"
-        f"2. A summary of how many options are available for each transport type\n"
-        f"3. Top recommendations (3-5 options) based on:\n"
-        f"   - Best balance of price and duration\n"
-        f"   - Shortest/fastest options\n"
-        f"   - Most affordable options\n"
-        f"   - Convenient departure/arrival times\n"
-        f"4. For each recommended option, include:\n"
-        f"   - Key details (departure/arrival times, airports/stations if applicable)\n"
-        f"   - Duration\n"
-        f"   - Price (if available)\n"
-        f"   - Number of stops (for flights)\n"
-        f"   - Brief reason why it's recommended\n\n"
-        f"Format the output in a clean, easy-to-read way. Use bullet points or numbered lists where appropriate.\n"
-        f"If there are many results, mention the total count and focus on the best options.\n"
-        f"Be conversational and helpful - this is for a user who wants to make a decision quickly.\n\n"
-        f"Return only your formatted response text, no JSON or code blocks."
+        f"Please analyze these results and provide a clear recommendation focusing only on the available information.\n"
+        f"1. Brief introduction with search details\n"
+        f"2. Summary of available transport options\n"
+        f"3. For each recommended option, include only the available information from these categories:\n"
+        f"   - Departure and arrival stations\n"
+        f"   - Transfer details (number of transfers, transfer points)\n"
+        f"   - Distance and duration\n"
+        f"   - Any other relevant journey details\n\n"
+        f"Important guidelines:\n"
+        f"- if a value is 0.0 try not to mention it \n"
+        f"- Only mention information that is actually available in the data\n"
+        f"- Do not mention or call out any missing information\n"
+        f"- Keep the output clean and focused only on the available details\n"
+        f"- Use simple, clear language without markdown formatting\n"
+        f"- For multi-segment journeys, describe each segment with available details\n"
+        f"- Return plain text only, no JSON or code blocks"
     )
     
     response = _model.generate_content(prompt)

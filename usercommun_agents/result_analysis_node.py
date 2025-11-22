@@ -86,21 +86,13 @@ def result_analysis_node(state: State) -> Dict:
     # Add relevant transport options to the prompt
     if flight_options:
         prompt += f"\nFlight options ({len(flight_options)} available):\n"
-        prompt += json.dumps(flight_options[:10], ensure_ascii=False, indent=2)  # Limit to first 10
-        if len(flight_options) > 10:
-            prompt += f"\n... and {len(flight_options) - 10} more flights"
-    
+        prompt += json.dumps(flight_options, ensure_ascii=False, indent=2)      
     if bus_options:
         prompt += f"\nBus options ({len(bus_options)} available):\n"
-        prompt += json.dumps(bus_options[:10], ensure_ascii=False, indent=2)
-        if len(bus_options) > 10:
-            prompt += f"\n... and {len(bus_options) - 10} more buses"
-    
+        prompt += json.dumps(bus_options, ensure_ascii=False, indent=2)
     if train_options:
         prompt += f"\nTrain options ({len(train_options)} available):\n"
-        prompt += json.dumps(train_options[:10], ensure_ascii=False, indent=2)
-        if len(train_options) > 10:
-            prompt += f"\n... and {len(train_options) - 10} more trains"
+        prompt += json.dumps(train_options, ensure_ascii=False, indent=2)
     
     prompt += (
         "\n\nAnalyze the user's request and provide a helpful response. "
