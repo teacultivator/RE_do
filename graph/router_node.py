@@ -6,6 +6,7 @@ Decision = Literal[
     "search_flights",
     "search_buses",
     "search_trains",
+    "analyze_results",
     "end",
 ]
 
@@ -14,6 +15,7 @@ RouterAction = Literal[
     "show_flights",
     "show_buses",
     "show_trains",
+    "analyze_results",
 ]
 
 
@@ -33,6 +35,19 @@ def _decide_action(state: State) -> RouterAction:
     date = state.get("date")
     mode = state.get("transport_mode")
     needs_refresh = state.get("needs_refresh", False)
+    followup_request = state.get("followup_request")
+    
+    # Check if we have transport options available
+    has_transport_options = bool(
+        state.get("flight_options") 
+        or state.get("bus_options") 
+        or state.get("train_options")
+    )
+    
+    # If we have transport options, parameters haven't changed (needs_refresh=False),
+    # and there's a followup request, route to result analysis
+    if has_transport_options and not needs_refresh and followup_request:
+        return "analyze_results"
 
     if not origin or not destination or not date:
         return "clarify"
@@ -75,5 +90,7 @@ def route_next(state: State) -> Decision:
         return "search_buses"
     if action == "show_trains":
         return "search_trains"
+    if action == "analyze_results":
+        return "analyze_results"
 
     return "clarify_or_respond"

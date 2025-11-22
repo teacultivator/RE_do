@@ -7,6 +7,7 @@ from .state import State
 from .router_node import router_node, route_next
 from usercommun_agents.query_node import query_node
 from usercommun_agents.result_node import result_node
+from usercommun_agents.result_analysis_node import result_analysis_node
 from trans_agents.bus_node import bus_node
 from trans_agents.train_node import train_node
 from trans_agents.flight_node import flight_node
@@ -17,6 +18,7 @@ Decision = Literal[
     "search_flights",
     "search_buses",
     "search_trains",
+    "analyze_results",
     "end",
 ]
 
@@ -25,6 +27,7 @@ RouterAction = Literal[
     "show_flights",
     "show_buses",
     "show_trains",
+    "analyze_results",
 ]
 
 
@@ -37,6 +40,7 @@ def build_graph():
     builder.add_node("bus", bus_node)
     builder.add_node("train", train_node)
     builder.add_node("result", result_node)
+    builder.add_node("result_analysis", result_analysis_node)
 
     builder.set_entry_point("query")
     builder.add_edge("query", "router")
@@ -49,6 +53,7 @@ def build_graph():
             "search_flights": "flight",
             "search_buses": "bus",
             "search_trains": "train",
+            "analyze_results": "result_analysis",
             "end": END,
         },
     )
@@ -56,6 +61,7 @@ def build_graph():
     builder.add_edge("flight", "result")
     builder.add_edge("bus", "result")
     builder.add_edge("train", "result")
+    builder.add_edge("result_analysis", END)
 
     checkpointer = MemorySaver()
 

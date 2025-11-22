@@ -13,22 +13,6 @@ _MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-2.0-flash")
 _model = genai.GenerativeModel(_MODEL_NAME)
 
 _REQUIRED_FIELDS = ("origin", "destination", "date", "transport_mode")
-_FOLLOWUP_KEYWORDS = (
-    "detail",
-    "details",
-    "more info",
-    "more about",
-    "option",
-    "options",
-    "show",
-    "filter",
-    "sort",
-    "cheapest",
-    "fastest",
-    "shortest",
-    "compare",
-    "list",
-)
 
 def _get_last_human(messages: List[BaseMessage]) -> Optional[str]:
     for m in reversed(messages):
@@ -45,11 +29,48 @@ def _missing_required_fields(state: State) -> List[str]:
     return [field for field in _REQUIRED_FIELDS if not state.get(field)]
 
 
-def _looks_like_followup(message: str, state_complete: bool) -> bool:
+def _looks_like_followup(message: str, state_complete: bool, state: State) -> bool:
+    """
+    Use LLM to determine if the message is a followup request about existing results
+    rather than a request to change search parameters.
+    """
     if not state_complete or not message:
         return False
-    lower = message.lower()
-    return any(keyword in lower for keyword in _FOLLOWUP_KEYWORDS)
+    
+    # Check if we have any transport options available
+    has_options = bool(
+        state.get("flight_options") 
+        or state.get("bus_options") 
+        or state.get("train_options")
+    )
+    
+    if not has_options:
+        return False
+    
+    # Use LLM to determine if this is a followup about existing results
+    prompt = (
+        "Determine if the user's message is asking about or analyzing existing travel results "
+        "(like asking for details, filtering, sorting, comparing options, or getting more info), "
+        "OR if they are trying to change the search parameters (origin, destination, date, transport mode).\n\n"
+        "Current search parameters:\n"
+        f"  Origin: {state.get('origin', 'not set')}\n"
+        f"  Destination: {state.get('destination', 'not set')}\n"
+        f"  Date: {state.get('date', 'not set')}\n"
+        f"  Transport mode: {state.get('transport_mode', 'not set')}\n\n"
+        f"User message: {json.dumps(message)}\n\n"
+        "Respond with a JSON object with a single boolean field 'is_followup':\n"
+        "- true if the user is asking about/examining existing results (details, filters, comparisons, etc.)\n"
+        "- false if they are trying to change search parameters or make a new search\n"
+        "Return only the JSON object, no extra text."
+    )
+    
+    try:
+        response = _call_gemini(prompt)
+        return response.get("is_followup", False)
+    except Exception as e:
+        # Fallback: if LLM fails, default to False (treat as parameter change)
+        print(f"Error in followup detection: {e}, defaulting to False")
+        return False
 
 def _clean_json_text(text: str) -> str:
     text = text.strip()
@@ -79,7 +100,7 @@ def query_node(state: State) -> Dict[str, Any]:
     state_complete = _is_state_complete(state)
     treat_as_followup = False
 
-    should_call_llm = not _looks_like_followup(last_user, state_complete)
+    should_call_llm = not _looks_like_followup(last_user, state_complete, state)
 
     snapshot: Dict[str, Any] = {
         "origin": state.get("origin"),
@@ -104,7 +125,7 @@ def query_node(state: State) -> Dict[str, Any]:
             + json.dumps(last_user)
             + "\nRespond with a JSON object containing only the keys you want to update. "
             "Allowed keys: origin, destination, date, time, transport_mode, origin_country, destination_country, needs. "
-            "Infer origin_country and destination_country whenever the cities imply them (e.g., 'Paris' implies France). "
+            "Try to almost always infer origin_country and destination_country whenever the cities imply them and have a value for country fields for both (e.g., 'Paris' implies France). "
             "If the new message does not clearly change a field, do not include that key. "
             "Resolve relative dates like 'tomorrow' or 'next Monday' into concrete ISO dates (YYYY-MM-DD) using the current datetime. "
             "Return only the JSON object, no extra text."
