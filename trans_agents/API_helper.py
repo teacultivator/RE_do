@@ -79,8 +79,6 @@ def search_flights(origin_city: str, origin_country:str ,destination_city: str, 
 
     codes = model.generate_content(prompt1).text
     print(codes)
-    
-    # Clean the response - remove markdown code blocks if present
     codes_clean = codes.strip()
     if codes_clean.startswith("```"):
         lines = codes_clean.splitlines()
@@ -88,9 +86,6 @@ def search_flights(origin_city: str, origin_country:str ,destination_city: str, 
             if lines[-1].startswith("```"):
                 codes_clean = "\n".join(lines[1:-1]).strip()
     codes_clean = codes_clean.strip()
-    
-    # Try to extract tuple pattern if embedded in text
-    import re
     tuple_pattern = r'\(["\']?([A-Z]{3})["\']?\s*,\s*["\']?([A-Z]{3})["\']?\)'
     match = re.search(tuple_pattern, codes_clean)
     if match:
