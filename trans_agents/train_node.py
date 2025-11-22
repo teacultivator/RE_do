@@ -60,27 +60,29 @@ def train_node(state: State) -> Dict:
         formatted_routes = [format_train_route(route) for route in routes]
         
         # Store in state
-        state["train_options"] = {
+        state["train_options"] = formatted_routes  # Store just the list of routes
+        state["train_metadata"] = {  # Store metadata separately
             "origin": origin,
             "destination": destination,
             "departure_time": departure_time.isoformat(),
-            "routes": formatted_routes,
             "last_updated": datetime.now().isoformat()
         }
         
         print(f"✅ Found {len(formatted_routes)} train routes")
+        return {
+            "train_options": formatted_routes,
+            "train_metadata": state["train_metadata"],
+            "needs_refresh": False,
+        }
         
     except Exception as e:
         error_msg = f"❌ Error searching for trains: {str(e)}"
         print(f"\n{error_msg}")
         state["train_error"] = str(e)
-        state["train_options"] = {
-            "routes": [],
-            "error": str(e),
-            "last_updated": datetime.now().isoformat()
+        state["train_options"] = []  # Empty list on error
+        
+        return {
+            "train_options": [],
+            "train_error": str(e),
+            "needs_refresh": False,
         }
-
-    return {
-        "train_options": state.get("train_options", {"routes": []}),
-        "needs_refresh": False,
-    }
