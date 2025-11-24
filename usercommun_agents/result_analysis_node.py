@@ -8,7 +8,7 @@ from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 from graph.state import State
 
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-2.0-flash")
+_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-2.5-flash")
 _model = genai.GenerativeModel(_MODEL_NAME)
 
 

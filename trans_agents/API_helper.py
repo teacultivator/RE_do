@@ -132,134 +132,50 @@ def search_flights(origin_city: str, origin_country:str ,destination_city: str, 
         print(f"An exception occured during/after the API call: {str(e)}")
         return []
 
+def _parse_routes_response(response: dict) -> list:
+    """
+    Parses the raw Google Routes API response into a simplified structure.
+    """
+    parsed_routes = []
+    
+    if not response or "routes" not in response:
+        return parsed_routes
 
-def process_bus_route(route: Dict) -> Dict:
-    """Process a single bus route from Google Routes API response."""
-    if not route:
-        return {}
-    
-    legs = route.get("legs", [{}])
-    steps = [step for leg in legs for step in leg.get("steps", []) if step.get("travelMode") == "TRANSIT"]
-    
-    if not steps:
-        return {}
+    for route in response["routes"]:
+        route_info = {
+            "total_duration": route.get("duration"),
+            "total_distance_meters": route.get("distanceMeters"),
+            "fare": route.get("travelAdvisory", {}).get("transitFare", {}),
+            "steps": []
+        }
         
-    # Calculate total fare if available
-    advisory = route.get("travelAdvisory", {})
-    fare = advisory.get("transitFare", {})
-    
-    # Get origin and destination for currency detection
-    origin = legs[0].get("startAddress", "") if legs and isinstance(legs, list) and len(legs) > 0 else ""
-    destination = legs[-1].get("endAddress", "") if legs and isinstance(legs, list) and len(legs) > 0 else ""
-    
-    # Determine currency based on location
-    origin_country, default_currency = _get_country_currency(origin)
-    dest_country, _ = _get_country_currency(destination)
-    
-    # If origin and destination are in different countries, prefer the origin's currency
-    fare_currency = fare.get('currencyCode', default_currency)
-    
-    # Extract fare amount
-    fare_units = fare.get('units', 0)
-    fare_nanos = fare.get('nanos', 0)
-    
-    # Calculate total fare in the smallest unit (e.g., paise for INR)
-    try:
-        total_fare = float(fare_units) + (float(fare_nanos) / 1e9)
-    except (TypeError, ValueError):
-        total_fare = 0.0
-    
-    # Format fare string with the appropriate currency symbol
-    if total_fare > 0:
-        if fare_currency == 'INR':
-            fare_str = f"₹{total_fare:,.2f}"
-        elif fare_currency == 'USD':
-            fare_str = f"${total_fare:,.2f}"
-        else:
-            fare_str = f"{fare_currency} {total_fare:,.2f}"
-    else:
-        fare_str = "Fare not available"
-    
-    # Process segments
-    segments = []
-    for step in steps:
-        transit = step.get("transitDetails", {})
-        if not transit:
-            continue
-            
-        departure_stop = transit.get("stopDetails", {}).get("arrivalStop", {}).get("name", "Unknown Stop")
-        arrival_stop = transit.get("stopDetails", {}).get("departureStop", {}).get("name", "Unknown Stop")
+        for leg in route.get("legs", []):
+            for step in leg.get("steps", []):
+                transit_details = step.get("transitDetails")
+                if transit_details:
+                    stop_details = transit_details.get("stopDetails", {})
+                    transit_line = transit_details.get("transitLine", {})
+                    vehicle = transit_line.get("vehicle", {})
+                    
+                    step_info = {
+                        "departure_stop": stop_details.get("departureStop", {}).get("name"),
+                        "arrival_stop": stop_details.get("arrivalStop", {}).get("name"),
+                        "departure_time": stop_details.get("departureTime"),
+                        "arrival_time": stop_details.get("arrivalTime"),
+                        "agency_name": transit_line.get("agencies", [{}])[0].get("name"),
+                        "line_name": transit_line.get("name"),
+                        "vehicle_type": vehicle.get("name", {}).get("text"),
+                        "num_stops": transit_details.get("stopCount"),
+                        "headsign": transit_details.get("headsign")
+                    }
+                    route_info["steps"].append(step_info)
         
-        segments.append({
-            "bus_name": transit.get("transitLine", {}).get("name", "Unknown Bus"),
-            "departure_stop": departure_stop,
-            "arrival_stop": arrival_stop,
-            "departure_time": transit.get("departureTime", ""),
-            "arrival_time": transit.get("arrivalTime", ""),
-            "num_stops": transit.get("stopCount", 0),
-            "headsign": transit.get("headsign", ""),
-            "transit_line": transit.get("transitLine", {}).get("name", ""),
-        })
-    
-    if not segments:
-        return {}
-    
-    # Calculate total duration in seconds
-    duration_seconds = sum(
-        (datetime.fromisoformat(s["arrival_time"].replace("Z", "")) - 
-         datetime.fromisoformat(s["departure_time"].replace("Z", ""))).total_seconds()
-        for s in segments if s.get("departure_time") and s.get("arrival_time")
-    )
-    
-    # Format duration as H:MM
-    hours = int(duration_seconds // 3600)
-    minutes = int((duration_seconds % 3600) // 60)
-    duration = f"{hours}:{minutes:02d}"
-    
-    return {
-        "segments": segments,
-        "total_duration": duration,
-        "total_fare": total_fare,  # Numeric value for calculations
-        "fare_display": fare_str,  # Formatted string for display
-        "fare_currency": fare_currency,  # Currency code
-        "total_transfers": len(segments) - 1,
-        "distance_km": round(route.get("distanceMeters", 0) / 1000, 1),
-        "departure_time": segments[0].get("departure_time", "") if segments else "",
-        "arrival_time": segments[-1].get("arrival_time", "") if segments else "",
-    }
-
-
-def process_train_route(route: Dict) -> Dict:
-    """
-    Process a single train route from Google Routes API response.
-    Similar to process_bus_route but with train-specific formatting.
-    """
-    if not route:
-        return {}
+        parsed_routes.append(route_info)
         
-    # Process as bus route first to get common fields
-    train_route = process_bus_route(route)
-    if not train_route:
-        return {}
-    
-    # Ensure transport_type is set to train
-    train_route["transport_type"] = "train"
-    
-    # Update segment transport types if they exist
-    if "segments" in train_route and isinstance(train_route["segments"], list):
-        for segment in train_route["segments"]:
-            if "bus_name" in segment:
-                segment["train_name"] = segment.pop("bus_name").replace("Bus", "Train")
-            segment["transport_type"] = "train"
-    
-    return train_route
+    return parsed_routes
 
+def get_buses_from_api(origin: str, destination: str, date_time: datetime) -> list:
 
-def get_buses_from_api(origin: str, destination: str, date_time: datetime) -> dict:
-    """
-    Fetch bus routes between origin and destination from Google Routes API.
-    Returns: Processed bus routes with only essential information
-    """
     # Get API key from environment variables
     api_key = os.getenv("GOOGLE_MAPS_API_KEY")
     if not api_key:
@@ -298,17 +214,7 @@ def get_buses_from_api(origin: str, destination: str, date_time: datetime) -> di
         response.raise_for_status()
         result = response.json()
         
-        # Process routes to extract only essential information
-        processed_routes = [process_bus_route(route) for route in result.get("routes", [])]
-        print(f"✅ Processed {len(processed_routes)} bus routes")
-        
-        return {
-            "origin": origin,
-            "destination": destination,
-            "departure_time": date_time.isoformat(),
-            "transport_type": "bus",
-            "routes": processed_routes
-        }
+        return _parse_routes_response(result)
         
     except requests.exceptions.Timeout:
         raise TimeoutError("⏱️ Google Routes API request timed out. The service is slow or unavailable.")
@@ -324,7 +230,7 @@ def get_buses_from_api(origin: str, destination: str, date_time: datetime) -> di
         raise Exception(f"❌ Error fetching bus routes: {str(e)}")
 
 
-def get_trains_from_api(origin: str, destination: str, date_time: datetime) -> dict:
+def get_trains_from_api(origin: str, destination: str, date_time: datetime) -> list:
     """
     Fetch train routes between origin and destination from Google Routes API.
     Returns: Processed train routes with only essential information
@@ -367,17 +273,8 @@ def get_trains_from_api(origin: str, destination: str, date_time: datetime) -> d
         response.raise_for_status()
         result = response.json()
         
-        # Process routes to extract only essential information
-        processed_routes = [process_train_route(route) for route in result.get("routes", [])]
-        print(f"✅ Processed {len(processed_routes)} train routes")
+        return _parse_routes_response(result)
         
-        return {
-            "origin": origin,
-            "destination": destination,
-            "departure_time": date_time.isoformat(),
-            "transport_type": "train",
-            "routes": [r for r in processed_routes if r]  # Filter out any empty routes
-        }
         
     except requests.exceptions.Timeout:
         raise TimeoutError("⏱️ Google Routes API request timed out. The service is slow or unavailable.")

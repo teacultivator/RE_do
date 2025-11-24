@@ -9,7 +9,7 @@ from langchain_core.messages import AIMessage, HumanMessage, BaseMessage
 from graph.state import State
 
 # Debug flag - set to False to disable debug prints
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 _MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-2.0-flash")
@@ -118,18 +118,11 @@ def _format_transport_results(
     # Prepare the data for LLM analysis
     transport_data = {}
     if flight_options:
-        transport_data["flights"] = flight_options[:20]  # Limit to first 20 for token efficiency
-        if len(flight_options) > 20:
-            transport_data["_flight_total"] = len(flight_options)
+        transport_data["flights"] = flight_options
     if bus_options:
-        transport_data["buses"] = bus_options[:20]
-        if len(bus_options) > 20:
-            transport_data["_bus_total"] = len(bus_options)
+        transport_data["buses"] = bus_options
     if train_options:
-        transport_data["trains"] = train_options[:20]
-        if len(train_options) > 20:
-            transport_data["_train_total"] = len(train_options)
-    
+        transport_data["trains"] = train_options
     prompt = (
         f"You are a helpful travel assistant presenting search results to a user.\n\n"
         f"Search Request:\n"
@@ -170,11 +163,7 @@ def _format_transport_results(
     
     if not formatted_text:
         # Fallback if LLM returns empty
-        formatted_text = (
-            f"I found travel options from {search_info['origin']} to {search_info['destination']} "
-            f"on {search_info['date']}. "
-            f"Please check the detailed results below:\n\n"
-            f"{json.dumps(transport_data, ensure_ascii=False, indent=2)}"
+        formatted_text = ("LLM had no ouput"
         )
     
     return formatted_text
