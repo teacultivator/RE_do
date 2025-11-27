@@ -1,0 +1,1245 @@
+Query ID,Query Type,Origin,Destination,Mode,Date,User Query,API Response Time (s),LLM Response Time (s),Total Time (s),Assistant Response
+1,Initial Query,London,Edinburgh,bus,2025-12-10,I want to go from London to Edinburgh by bus on 2025-12-10,1.1212,5.4402,8.5133,"Okay, I have reviewed the bus options for your trip from London to Edinburgh on December 10, 2025.
+
+I found several options. Here's a summary:
+
+**Option 1:**
+
+*   Departs from Finchley Road & Frognal and arrives in Edinburgh.
+*   This journey has one transfer at London Finchley Road.
+*   The total journey distance is 642045 meters and the total duration is 29100 seconds.
+*   The first segment is with National Express, line London Paddington - London Stansted Airport, heading to London Paddington. The second segment is with FlixBus, line Glasgow - London Victoria, heading to Glasgow.
+
+**Option 2:**
+
+*   Departs from Victoria Coach Station and arrives at Edinburgh Bus Station.
+*   This journey has one transfer at Leeds Bus Station.
+*   The total journey distance is 669354 meters and the total duration is 37200 seconds.
+*   The first segment is with National Express, line London Victoria - Newcastle upon Tyne, heading to Newcastle upon Tyne. The second segment is with National Express, line Birmingham - Glasgow, heading to Glasgow.
+
+**Option 3:**
+
+*   Departs from Victoria Coach Station and arrives in Edinburgh.
+*   This is a direct bus with no transfers.
+*   The total journey distance is 681591 meters and the total duration is 36300 seconds.
+*   The bus is with FlixBus, line Glasgow - London Victoria, heading to Glasgow.
+
+**Option 4:**
+
+*   Departs from Victoria Coach Station and arrives at Edinburgh Bus Station.
+*   This journey has two transfers, at Manchester Coach Station and Leeds Bus Station.
+*   The total journey distance is 761977 meters and the total duration is 55200 seconds.
+*   The first segment is with National Express, line Liverpool One Bus Station - London Victoria, heading to Liverpool One Bus Station. The second segment is with National Express, line Manchester Airport - Newcastle upon Tyne, heading to Newcastle upon Tyne. The third segment is with National Express, line Birmingham - Glasgow, heading to Glasgow.
+
+**Option 5:**
+
+*   Departs from London St Johns Wood and arrives at Edinburgh Bus Station.
+*   This journey has two transfers, at London Finchley Road and Nottingham Broad Marsh Bus Station.
+*   The total journey distance is 674890 meters and the total duration is 37680 seconds.
+*   The first segment is with National Express, line London Luton Airport - London Victoria, heading to London Luton Airport. The second segment is with FlixBus, line Amsterdam Central Train Station - London Victoria, heading to Nottingham. The third segment is with National Express, line Birmingham - Glasgow, heading to Glasgow.
+
+**Option 6:**
+
+*   Departs from Finchley Road & Frognal and arrives at Edinburgh Bus Station.
+*   This journey has two transfers, at London Finchley Road and Nottingham Broad Marsh Bus Station.
+*   The total journey distance is 673309 meters and the total duration is 38940 seconds.
+*   The first segment is with National Express, line London Paddington - London Stansted Airport, heading to London Paddington. The second segment is with FlixBus, line Amsterdam Central Train Station - London Victoria, heading to Nottingham. The third segment is with National Express, line Birmingham - Glasgow, heading to Glasgow."
+2,Initial Query,New York,Philadelphia,bus,2025-12-10,I want to go from New York to Philadelphia by bus on 2025-12-10,0.9159,4.9287,7.1998,"Okay, here are the bus options for your trip from New York to Philadelphia on December 10, 2025.
+
+We found several bus routes for your journey. Here's a summary of the options:
+
+Option 1: Greyhound
+
+*   Departs from Port Authority Bus Terminal and arrives at Philadelphia John F Kennedy Boulevard.
+*   This is a direct bus with no transfers.
+*   The journey covers 163214 meters and lasts 7800 seconds.
+
+Option 2: MTA and FlixBus
+
+*   This journey involves a transfer.
+*   The first bus, operated by MTA, departs from 7 Av/W 34 St and arrives at 7 Ave/W 31 St.
+*   The second bus, operated by FlixBus, departs from NYC Midtown 31st St & 8th Ave and arrives at Philadelphia Spring Garden Street.
+*   The total distance is 152831 meters, with a total duration of 7800 seconds.
+
+Option 3: Peter Pan Bus Lines and Southeastern Pennsylvania Transportation Authority
+
+*   This journey requires a transfer.
+*   The first bus, operated by Peter Pan Bus Lines, departs from New York (Port Authority Bus Terminal) and arrives at Philadelphia (Schuylkill & Walnut).
+*   The second bus, operated by Southeastern Pennsylvania Transportation Authority, departs from Market St & Schuylkill Av and arrives at Market St & 15th St.
+*   The total distance is 159483 meters and the total duration is 7702 seconds.
+
+Option 4: Greyhound with a transfer in Newark
+
+*   This journey includes a transfer in Newark.
+*   The first bus, operated by Greyhound, departs from Port Authority Bus Terminal and arrives in Newark.
+*   The second bus, operated by Greyhound, departs from Newark and arrives at Philadelphia John F Kennedy Boulevard.
+*   The total distance is 160608 meters and the journey lasts 8700 seconds.
+
+Option 5: Peter Pan Bus Lines and Southeastern Pennsylvania Transportation Authority
+
+*   This option involves a transfer.
+*   The first bus, operated by Peter Pan Bus Lines, departs from New York (Port Authority Bus Terminal) and arrives at Philadelphia (Spring Garden).
+*   The second segment is a subway operated by Southeastern Pennsylvania Transportation Authority, departing from Spring Garden and arriving at 11th St.
+*   The total distance is 155560 meters and the total duration is 6869 seconds.
+
+Option 6: Peter Pan Bus Lines and Southeastern Pennsylvania Transportation Authority
+
+*   This option includes a transfer.
+*   The first bus, operated by Peter Pan Bus Lines, departs from New York (Port Authority Bus Terminal) and arrives at Philadelphia (Schuylkill & Walnut).
+*   The second bus, operated by Southeastern Pennsylvania Transportation Authority, departs from Market St & Schuylkill Av and arrives at Market St & 15th St.
+*   The journey covers 159483 meters and lasts 7762 seconds."
+3,Initial Query,Berlin,Hamburg,bus,2025-12-10,I want to go from Berlin to Hamburg by bus on 2025-12-10,1.0563,3.9633,6.3323,"Okay, I found some bus options for your trip from Berlin to Hamburg on December 10, 2025.
+
+Here is a summary of the available options: there are multiple direct bus routes and some routes that involve a transfer.
+
+Option 1:
+Departs from Berlin and arrives at Hamburg Central Bus Station.
+This is a direct bus with no transfers.
+The journey covers 252498 meters and lasts 12600 seconds.
+This bus is operated by FlixBus.
+
+Option 2:
+Departs from Berlin and arrives at Hamburg Hauptbahnhof, involving one transfer in Lübeck.
+The first segment goes from Berlin to Lübeck Hbf/ZOB, operated by Flixbus.
+The second segment goes from Lübeck Hbf to Hamburg Hauptbahnhof, operated by DB Fernverkehr AG.
+The journey covers 293039 meters and lasts 15600 seconds.
+
+Option 3:
+Departs from Berlin and arrives at Hamburg Hauptbahnhof, involving one transfer in Lübeck.
+The first segment goes from Berlin to Lübeck, operated by FlixBus.
+The second segment goes from Lübeck to Hamburg Hauptbahnhof, operated by DB Regio AG.
+The journey covers 366225 meters and lasts 15420 seconds.
+
+Option 4:
+Departs from Berlin and arrives at Hamburg Central Bus Station.
+This is a direct bus with no transfers.
+The journey covers 280003 meters and lasts 11700 seconds.
+This bus is operated by FlixBus.
+
+Option 5:
+Departs from Berlin and arrives at Hamburg Central Bus Station.
+This is a direct bus with no transfers.
+The journey covers 280003 meters and lasts 11700 seconds.
+This bus is operated by FlixBus.
+
+Option 6:
+Departs from Berlin and arrives at Hamburg Central Bus Station.
+This is a direct bus with no transfers.
+The journey covers 280003 meters and lasts 11700 seconds.
+This bus is operated by FlixBus."
+4,Initial Query,Paris,Marseille,bus,2025-12-10,I want to go from Paris to Marseille by bus on 2025-12-10,0.7907,4.3740,6.6339,"Here are the travel options from Paris to Marseille for December 10, 2025, based on your request for bus travel.
+
+The provided data includes several train options instead of buses.
+
+Option 1: Trenitalia
+- Departure: Gare de Lyon at 04:54
+- Arrival: Marseille-St-Charles at 08:15
+- Total duration: 12060 seconds
+- Distance: 1035500 meters
+- Direct train with 5 stops
+
+Option 2: OUIGO
+- Departure: Gare de Lyon at 05:03
+- Arrival: Marseille-St-Charles at 08:24
+- Total duration: 12060 seconds
+- Distance: 747370 meters
+- Direct train with 4 stops
+
+Option 3: SNCF Voyageurs
+- Departure: Gare de Lyon at 05:29
+- Arrival: Marseille-St-Charles at 08:56
+- Total duration: 12420 seconds
+- Distance: 747370 meters
+- Direct train with 4 stops
+
+Option 4: SNCF Voyageurs
+- Departure: Gare de Lyon at 06:36
+- Arrival: Marseille-St-Charles at 09:58
+- Total duration: 12120 seconds
+- Distance: 747370 meters
+- Direct train with 4 stops
+- Fare: 33 EUR
+
+Option 5: SNCF Voyageurs
+- Departure: Gare de Lyon at 08:09
+- Arrival: Marseille-St-Charles at 11:14
+- Total duration: 11100 seconds
+- Distance: 747371 meters
+- Direct train with 2 stops
+- Fare: 50 EUR
+
+Option 6: SNCF Voyageurs
+- This option involves one transfer at Lyon Part Dieu.
+- First segment:
+  - Departure: Gare de Lyon at 06:00
+  - Arrival: Lyon Part Dieu at 07:56
+  - 2 stops
+- Second segment:
+  - Departure: Lyon Part Dieu at 08:07
+  - Arrival: Marseille-St-Charles at 09:50
+  - 4 stops
+- Total duration: 13800 seconds
+- Distance: 747391 meters"
+5,Initial Query,Madrid,Seville,bus,2025-12-10,I want to go from Madrid to Seville by bus on 2025-12-10,0.5490,5.0637,6.8866,"Okay, here are the bus options for your trip from Madrid to Seville on December 10, 2025:
+
+There are several bus routes available.
+
+Option 1:
+*   Departs from Madrid Estacion Sur and arrives at Sevilla Plaza Armas.
+*   This journey involves 1 transfer at Estación De Autobuses.
+*   The total journey distance is 567889 meters and the duration is 30600 seconds.
+*   The first bus departs Madrid Estacion Sur at 00:30 and arrives at Estación De Autobuses at 05:30 with ALSA.
+*   The second bus departs from Estación De Autobuses at 06:00 and arrives at Sevilla Plaza Armas at 09:00 with ALSA.
+
+Option 2:
+*   Departs from Madrid Estacion Sur and arrives at Sevilla Plaza Armas.
+*   This journey involves 2 transfers at Estación De Autobuses. and Malaga
+*   The total journey distance is 618536 meters and the duration is 36900 seconds.
+*   The first bus departs Madrid Estacion Sur at 00:30 and arrives at Estación De Autobuses at 05:30 with ALSA.
+*   The second bus departs from Estación De Autobuses at 06:00 and arrives at Malaga at 07:45 with ALSA.
+*   The third bus departs from Malaga at 08:00 and arrives at Sevilla Plaza Armas at 10:45 with ALSA.
+
+Option 3:
+*   Departs from Madrid Estacion Sur and arrives at Sevilla Plaza Armas.
+*   This journey involves 1 transfer at Estación De Autobuses.
+*   The total journey distance is 567889 meters and the duration is 28800 seconds.
+*   The first bus departs Madrid Estacion Sur at 08:00 and arrives at Estación De Autobuses at 12:30 with ALSA.
+*   The second bus departs from Estación De Autobuses at 13:00 and arrives at Sevilla Plaza Armas at 16:00 with ALSA.
+
+Option 4:
+*   Departs from Madrid Estacion Sur and arrives at Sevilla.
+*   This journey involves 1 transfer at Estación de Autobuses and Mérida
+*   The total journey distance is 462858 meters and the duration is 28200 seconds.
+*   The first bus departs Madrid Estacion Sur at 09:30 and arrives at Estación de Autobuses at 13:29 with ALSA.
+*   The second bus departs from Mérida at 14:25 and arrives at Sevilla at 17:20 with Lineas Extremeñas de Autobuses S.A."
+6,Initial Query,Rome,Naples,bus,2025-12-10,I want to go from Rome to Naples by bus on 2025-12-10,0.8236,4.7665,6.8395,"Okay, I have analyzed the bus options for your trip from Rome to Naples on December 10, 2025.
+
+Here's a summary of the available options:
+
+Option 1:
+
+*   Departs from Rome Tiburtina Bus station and arrives at Naples Metropark Central Parking.
+*   The first bus is operated by FlixBus with line name FlixBus: Avellino - Udine.
+*   There is one transfer.
+*   Transfer at Napoli Stazione Centrale to Napoli Garibaldi. The second bus is operated by BusItalia Campania.
+*   The total trip distance is 231043 meters and the duration is 11526 seconds.
+
+Option 2:
+
+*   Departs from Rome Tiburtina Bus station and arrives at Naples Metropark Central Parking.
+*   The first bus is operated by FlixBus with line name FlixBus: Avellino - Udine.
+*   There is one transfer.
+*   Transfer at Napoli - Via G. Ferraris , df Hotel Ramada to Napoli - P.zza Garibaldi. The second bus is operated by Eav srl - Divisione Autolinee.
+*   The total trip distance is 231420 meters and the duration is 11490 seconds.
+
+Option 3:
+
+*   Departs from Rome Tiburtina Bus Station and arrives at Naples Metropark.
+*   The first bus is operated by MarinoBus with line name MarinoBus 055: Como - Salerno Main Train Station.
+*   There is one transfer.
+*   Transfer at Napoli - Via G. Ferraris , df Hotel Ramada to Napoli - P.zza Garibaldi. The second bus is operated by Eav srl - Divisione Autolinee.
+*   The total trip distance is 231412 meters and the duration is 10890 seconds.
+
+Option 4:
+
+*   Departs from Rome Tiburtina Bus station and arrives at Naples Metropark Central Parking.
+*   The first bus is operated by Itabus with line name Itabus: Bergamo Central Bus Station - Salerno Main Train Station.
+*   There is one transfer.
+*   Transfer at Napoli Stazione Centrale to Napoli Garibaldi. The second bus is operated by BusItalia Campania.
+*   The total trip distance is 224159 meters and the duration is 10626 seconds.
+
+Option 5:
+
+*   Departs from Rome Tiburtina Bus station and arrives at Naples Metropark Central Parking.
+*   The first bus is operated by FlixBus with line name FlixBus: Salerno Main Train Station - Treviso Main Train Station.
+*   There is one transfer.
+*   Transfer at Napoli Stazione Centrale to Napoli Garibaldi. The second bus is operated by BusItalia Campania.
+*   The total trip distance is 231163 meters and the duration is 10926 seconds.
+
+Option 6:
+
+*   Departs from Rome Tiburtina Bus station and arrives at Naples Metropark Central Parking.
+*   The first bus is operated by Itabus with line name Itabus: Bergamo Central Bus Station - Taranto.
+*   There is one transfer.
+*   Transfer at Napoli Stazione Centrale to Napoli Garibaldi. The second bus is operated by BusItalia Campania.
+*   The total trip distance is 236465 meters and the duration is 12726 seconds."
+7,Initial Query,Tokyo,Nagoya,bus,2025-12-10,I want to go from Tokyo to Nagoya by bus on 2025-12-10,0.4045,0.0000,1.5740,I have all core fields; ready to show results once agents are implemented.
+8,Initial Query,Sydney,Brisbane,bus,2025-12-10,I want to go from Sydney to Brisbane by bus on 2025-12-10,0.6905,8.2372,10.2101,"Okay, I have found some bus options for your trip from Sydney to Brisbane on December 10, 2025.
+
+Here's a summary of the available options:
+
+**Option 1**
+
+*   Departs from Sydney and arrives at Brisbane Roma St Bus Stop.
+*   Includes one transfer in Ballina.
+*   The total distance is 811883 meters and the total duration is 62100 seconds.
+*   The first bus departs Sydney at 08:00 and arrives in Ballina at 20:30, operated by Greyhound Australia with line name Sydney To Brisbane International, making 14 stops.
+*   The second bus departs Ballina Tamar St at 22:25 and arrives at Brisbane Roma St Bus Stop at 01:15, operated by Byron Easybus with line name Northbound - Casino to Brisbane Int., making 5 stops.
+
+**Option 2**
+
+*   Departs from Sydney and arrives at Brisbane Roma St Bus Stop.
+*   Includes one transfer in Byron Bay.
+*   The total distance is 813650 meters and the total duration is 62100 seconds.
+*   The first bus departs Sydney at 08:00 and arrives in Byron Bay at 21:10, operated by Greyhound Australia with line name Sydney To Brisbane International, making 15 stops.
+*   The second bus departs Byron Bay - Visitor Information Centre at 22:45 and arrives at Brisbane Roma St Bus Stop at 01:15, operated by Byron Easybus with line name Northbound - Byron to Brisbane Int., making 3 stops.
+
+**Option 3**
+
+*   Departs from Sydney and arrives at Brisbane Roma St Bus Stop.
+*   Includes one transfer at Bilinga (Opp Gold Coast Airpt).
+*   The total distance is 814617 meters and the total duration is 62100 seconds.
+*   The first bus departs Sydney at 08:00 and arrives at Bilinga (Opp Gold Coast Airpt) at 22:45, operated by Greyhound Australia with line name Sydney To Brisbane International, making 17 stops.
+*   The second bus departs Gold Coast Airport at 23:45 and arrives at Brisbane Roma St Bus Stop at 01:15, operated by Byron Easybus with line name Northbound - Pottsville to Brisbane Int., making 2 stops.
+
+**Option 4**
+
+*   Departs from Sydney and arrives at Roma Street busway station.
+*   Includes one transfer in Brisbane.
+*   The total distance is 816170 meters and the total duration is 62400 seconds.
+*   The first bus departs Sydney at 08:00 and arrives in Brisbane at 01:00, operated by Greyhound Australia with line name Sydney To Brisbane International, making 20 stops.
+*   The second bus departs King George Square bus station at 01:16 and arrives at Roma Street busway station at 01:20, operated by Translink with line name Eight Mile Plains - City, making 2 stops.
+
+**Option 5**
+
+*   Departs from Sydney and arrives at Brisbane Roma St Bus Stop.
+*   Includes one transfer in Ballina.
+*   The total distance is 811883 meters and the total duration is 56700 seconds.
+*   The first bus departs Sydney at 10:30 and arrives in Ballina at 23:00, operated by Greyhound Australia with line name Sydney To Brisbane, making 14 stops.
+*   The second bus departs Ballina Tamar St at 23:25 and arrives at Brisbane Roma St Bus Stop at 02:15, operated by Byron Easybus with line name Northbound - Casino to Brisbane Int., making 5 stops.
+
+**Option 6**
+
+*   Departs from Sydney on December 11th, 2025, and arrives at Brisbane Roma St Bus Stop.
+*   Includes one transfer in Ballina.
+*   The total distance is 811883 meters and the total duration is 62100 seconds.
+*   The first bus departs Sydney at 08:00 and arrives in Ballina at 20:30, operated by Greyhound Australia with line name Sydney To Brisbane International, making 14 stops.
+*   The second bus departs Ballina Tamar St at 22:25 and arrives at Brisbane Roma St Bus Stop at 01:15, operated by Byron Easybus with line name Northbound - Casino to Brisbane Int., making 5 stops."
+9,Initial Query,Toronto,Ottawa,bus,2025-12-10,I want to go from Toronto to Ottawa by bus on 2025-12-10,0.8711,0.0000,2.2005,"I found 0 flight(s), 6 bus(es), and 0 train(s) available. Here are the results:
+
+{
+  ""flights"": [],
+  ""buses"": [
+    {
+      ""total_duration"": ""34500s"",
+      ""total_distance_meters"": 462692,
+      ""fare"": {},
+      ""steps"": [
+        {
+          ""departure_stop"": ""Toronto Yorkdale Rd"",
+          ""arrival_stop"": ""Kingston John Counter Blvd"",
+          ""departure_time"": ""2025-12-10T00:30:00Z"",
+          ""arrival_time"": ""2025-12-10T03:35:00Z"",
+          ""agency_name"": ""Megabus"",
+          ""line_name"": ""CoachCanada 2711: Kingston - Mississauga"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 5,
+          ""headsign"": ""Kingston""
+        },
+        {
+          ""departure_stop"": ""Kingston John Counter Blvd"",
+          ""arrival_stop"": ""St. Laurent"",
+          ""departure_time"": ""2025-12-10T08:00:00Z"",
+          ""arrival_time"": ""2025-12-10T10:05:00Z"",
+          ""agency_name"": ""Megabus"",
+          ""line_name"": ""CoachCanada 2730: Kingston - Ottawa"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 3,
+          ""headsign"": ""Ottawa""
+        }
+      ]
+    },
+    {
+      ""total_duration"": ""22620s"",
+      ""total_distance_meters"": 457497,
+      ""fare"": {},
+      ""steps"": [
+        {
+          ""departure_stop"": ""Toronto Town Centre Court"",
+          ""arrival_stop"": ""Ottawa Gloucester Centre"",
+          ""departure_time"": ""2025-12-10T05:30:00Z"",
+          ""arrival_time"": ""2025-12-10T11:00:00Z"",
+          ""agency_name"": ""FlixBus"",
+          ""line_name"": ""FlixBus: Mississauga - Ottawa"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 6,
+          ""headsign"": ""Ottawa""
+        },
+        {
+          ""departure_stop"": ""City Park / Ogilvie"",
+          ""arrival_stop"": ""Rideau"",
+          ""departure_time"": ""2025-12-10T11:16:05Z"",
+          ""arrival_time"": ""2025-12-10T11:47:00Z"",
+          ""agency_name"": ""OC Transpo"",
+          ""line_name"": ""Blair <> Tunney's Pasture"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 47,
+          ""headsign"": ""Tunney's Pasture""
+        }
+      ]
+    },
+    {
+      ""total_duration"": ""20404s"",
+      ""total_distance_meters"": 445781,
+      ""fare"": {},
+      ""steps"": [
+        {
+          ""departure_stop"": ""Toronto Town Centre Court"",
+          ""arrival_stop"": ""Ottawa VIA Rail"",
+          ""departure_time"": ""2025-12-10T05:30:00Z"",
+          ""arrival_time"": ""2025-12-10T10:45:00Z"",
+          ""agency_name"": ""FlixBus"",
+          ""line_name"": ""FlixBus: Mississauga - Ottawa"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 5,
+          ""headsign"": ""Ottawa""
+        },
+        {
+          ""departure_stop"": ""Tremblay"",
+          ""arrival_stop"": ""Rideau"",
+          ""departure_time"": ""2025-12-10T10:59:04Z"",
+          ""arrival_time"": ""2025-12-10T11:10:04Z"",
+          ""agency_name"": ""OC Transpo"",
+          ""line_name"": ""1"",
+          ""vehicle_type"": ""Light rail"",
+          ""num_stops"": 5,
+          ""headsign"": ""Tunney's Pasture""
+        }
+      ]
+    },
+    {
+      ""total_duration"": ""22200s"",
+      ""total_distance_meters"": 447111,
+      ""fare"": {},
+      ""steps"": [
+        {
+          ""departure_stop"": ""Toronto Town Centre Court"",
+          ""arrival_stop"": ""Ottawa VIA Rail"",
+          ""departure_time"": ""2025-12-10T05:30:00Z"",
+          ""arrival_time"": ""2025-12-10T10:45:00Z"",
+          ""agency_name"": ""FlixBus"",
+          ""line_name"": ""FlixBus: Mississauga - Ottawa"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 5,
+          ""headsign"": ""Ottawa""
+        },
+        {
+          ""departure_stop"": ""Tremblay / Belfast"",
+          ""arrival_stop"": ""Rideau"",
+          ""departure_time"": ""2025-12-10T11:24:13Z"",
+          ""arrival_time"": ""2025-12-10T11:40:00Z"",
+          ""agency_name"": ""OC Transpo"",
+          ""line_name"": ""St-Laurent <> Billings Bridge"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 24,
+          ""headsign"": ""Billings Bridge""
+        }
+      ]
+    },
+    {
+      ""total_duration"": ""18300s"",
+      ""total_distance_meters"": 436455,
+      ""fare"": {},
+      ""steps"": [
+        {
+          ""departure_stop"": ""Toronto Borough Drive"",
+          ""arrival_stop"": ""Kingston John Counter Blvd"",
+          ""departure_time"": ""2025-12-10T12:30:00Z"",
+          ""arrival_time"": ""2025-12-10T15:05:00Z"",
+          ""agency_name"": ""Megabus"",
+          ""line_name"": ""CoachCanada 2720: Toronto - Toronto Pearson Airport"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 2,
+          ""headsign"": ""Montreal""
+        },
+        {
+          ""departure_stop"": ""Kingston John Counter Blvd"",
+          ""arrival_stop"": ""St. Laurent"",
+          ""departure_time"": ""2025-12-10T15:25:00Z"",
+          ""arrival_time"": ""2025-12-10T17:35:00Z"",
+          ""agency_name"": ""Megabus"",
+          ""line_name"": ""CoachCanada 2730: Kingston - Ottawa"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 3,
+          ""headsign"": ""Ottawa""
+        }
+      ]
+    },
+    {
+      ""total_duration"": ""17100s"",
+      ""total_distance_meters"": 433541,
+      ""fare"": {
+        ""currencyCode"": ""CAD"",
+        ""units"": ""30"",
+        ""nanos"": 970000000
+      },
+      ""steps"": [
+        {
+          ""departure_stop"": ""Scarborough"",
+          ""arrival_stop"": ""Ottawa"",
+          ""departure_time"": ""2025-12-10T13:30:00Z"",
+          ""arrival_time"": ""2025-12-10T18:15:00Z"",
+          ""agency_name"": ""Rider Express"",
+          ""line_name"": ""Toronto - Ottawa"",
+          ""vehicle_type"": ""Bus"",
+          ""num_stops"": 5,
+          ""headsign"": ""Ottawa""
+        }
+      ]
+    }
+  ],
+  ""trains"": []
+}"
+10,Initial Query,Mumbai,Nashik,bus,2025-12-10,I want to go from Mumbai to Nashik by bus on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 30.884766551s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 30
+}
+]"
+11,Initial Query,Delhi,Chandigarh,bus,2025-12-10,I want to go from Delhi to Chandigarh by bus on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 30.674581017s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 30
+}
+]"
+12,Initial Query,Bangalore,Coimbatore,bus,2025-12-10,I want to go from Bangalore to Coimbatore by bus on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 30.377132925s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 30
+}
+]"
+13,Initial Query,Amsterdam,Brussels,bus,2025-12-10,I want to go from Amsterdam to Brussels by bus on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 30.148989149s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 30
+}
+]"
+14,Initial Query,Barcelona,Valencia,bus,2025-12-10,I want to go from Barcelona to Valencia by bus on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 29.860553397s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 29
+}
+]"
+15,Initial Query,Los Angeles,San Francisco,bus,2025-12-10,I want to go from Los Angeles to San Francisco by bus on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 29.612283217s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 29
+}
+]"
+16,Initial Query,London,Amsterdam,train,2025-12-10,I want to go from London to Amsterdam by train on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 29.351618831s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 29
+}
+]"
+17,Initial Query,Paris,Geneva,train,2025-12-10,I want to go from Paris to Geneva by train on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 29.10836099s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 29
+}
+]"
+18,Initial Query,Brussels,Cologne,train,2025-12-10,I want to go from Brussels to Cologne by train on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 28.611418757s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 28
+}
+]"
+19,Initial Query,Amsterdam,Frankfurt,train,2025-12-10,I want to go from Amsterdam to Frankfurt by train on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 28.282414756s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 28
+}
+]"
+20,Initial Query,Berlin,Munich,train,2025-12-10,I want to go from Berlin to Munich by train on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 27.994197944s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 27
+}
+]"
+21,Initial Query,Prague,Krakow,train,2025-12-10,I want to go from Prague to Krakow by train on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 27.751033469s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 27
+}
+]"
+22,Initial Query,Vienna,Salzburg,train,2025-12-10,I want to go from Vienna to Salzburg by train on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 27.489937465s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 27
+}
+]"
+23,Initial Query,Tokyo,Osaka,train,2025-12-10,I want to go from Tokyo to Osaka by train on 2025-12-10,ERROR,ERROR,ERROR,"429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-2.0-flash
+Please retry in 27.209252496s. [links {
+  description: ""Learn more about Gemini API quotas""
+  url: ""https://ai.google.dev/gemini-api/docs/rate-limits""
+}
+, violations {
+  quota_metric: ""generativelanguage.googleapis.com/generate_content_free_tier_requests""
+  quota_id: ""GenerateRequestsPerMinutePerProjectPerModel-FreeTier""
+  quota_dimensions {
+    key: ""model""
+    value: ""gemini-2.0-flash""
+  }
+  quota_dimensions {
+    key: ""location""
+    value: ""global""
+  }
+  quota_value: 15
+}
+, retry_delay {
+  seconds: 27
+}
+]"
+24,Initial Query,Osaka,Fukuoka,train,2025-12-10,I want to go from Osaka to Fukuoka by train on 2025-12-10,0.3626,0.0000,1.5845,I have all core fields; ready to show results once agents are implemented.
+25,Initial Query,New York,Boston,train,2025-12-10,I want to go from New York to Boston by train on 2025-12-10,0.5508,7.0509,8.9984,"Okay, I found some train options for your trip from New York to Boston on December 10, 2025.
+
+Here's a summary of the available train options:
+
+**Option 1:**
+
+*   Departure Station: New York Moynihan Train Hall At Penn Station
+*   Arrival Station: Boston Back Bay Station
+*   Agency: Amtrak, Acela line
+*   Distance: 370807 meters
+*   Duration: 13680 seconds
+*   Number of Stops: 6
+*   Departure Time: 2025-12-10T00:10:00Z
+*   Arrival Time: 2025-12-10T03:58:00Z
+
+**Option 2:**
+
+*   Departure Station: New York Moynihan Train Hall At Penn Station
+*   Arrival Station: Boston Back Bay Station
+*   Agency: Amtrak, Northeast Regional line
+*   Distance: 370535 meters
+*   Duration: 15600 seconds
+*   Number of Stops: 12
+*   Departure Time: 2025-12-10T00:50:00Z
+*   Arrival Time: 2025-12-10T05:10:00Z
+
+**Option 3:**
+
+*   This option involves a transfer.
+*   First Segment:
+    *   Departure Station: Grand Central Terminal
+    *   Arrival Station: Stamford
+    *   Agency: Metro-North Railroad, New Canaan line
+    *   Distance: 368032 meters (total distance)
+    *   Duration: 17220 seconds (total duration)
+    *   Number of Stops: 3
+    *   Departure Time: 2025-12-10T00:03:00Z
+    *   Arrival Time: 2025-12-10T00:51:00Z
+*   Second Segment:
+    *   Departure Station: Stamford
+    *   Arrival Station: South Station
+    *   Agency: Amtrak, Northeast Regional line
+    *   Number of Stops: 11
+    *   Departure Time: 2025-12-10T01:05:00Z
+    *   Arrival Time: 2025-12-10T04:50:00Z
+
+**Option 4:**
+
+*   Departure Station: New York Moynihan Train Hall At Penn Station
+*   Arrival Station: Boston Back Bay Station
+*   Agency: Amtrak, Acela line
+*   Distance: 370767 meters
+*   Duration: 14220 seconds
+*   Number of Stops: 6
+*   Departure Time: 2025-12-10T10:27:00Z
+*   Arrival Time: 2025-12-10T14:24:00Z
+
+**Option 5:**
+
+*   Departure Station: New York Moynihan Train Hall At Penn Station
+*   Arrival Station: Boston Back Bay Station
+*   Agency: Amtrak, Northeast Regional line
+*   Distance: 370535 meters
+*   Duration: 15240 seconds
+*   Number of Stops: 13
+*   Departure Time: 2025-12-10T10:44:00Z
+*   Arrival Time: 2025-12-10T14:58:00Z
+
+**Option 6:**
+
+*   Departure Station: New York Moynihan Train Hall At Penn Station
+*   Arrival Station: Boston Back Bay Station
+*   Agency: Amtrak, Acela line
+*   Distance: 370807 meters
+*   Duration: 12960 seconds
+*   Number of Stops: 5
+*   Departure Time: 2025-12-10T12:57:00Z
+*   Arrival Time: 2025-12-10T16:33:00Z"
+26,Initial Query,Boston,Washington DC,train,2025-12-10,I want to go from Boston to Washington DC by train on 2025-12-10,0.5882,6.2231,8.2357,"OK. Here are the train options from Boston to Washington DC on December 10, 2025.
+
+I found several train options for your trip. Let's take a look:
+
+Option 1:
+
+*   Departs from: Boston Back Bay Station
+*   Arrives at: Philadelphia
+*   The first segment is via Amtrak's Northeast Regional line and has 14 stops.
+*   Departs at: 2025-12-10T00:52:00Z
+*   Arrives at: 2025-12-10T06:39:00Z
+
+*   Departs from: Philadelphia
+*   Arrives at: Union Station
+*   The second segment is via Amtrak's Northeast Regional line and has 6 stops.
+*   Departs at: 2025-12-10T09:45:00Z
+*   Arrives at: 2025-12-10T11:54:00Z
+
+*   Total distance: 731758 meters
+*   Total duration: 39720 seconds
+
+Option 2:
+
+*   Departs from: Boston Back Bay Station
+*   Arrives at: Union Station
+*   This option is via Amtrak's Acela line and has 12 stops.
+*   Departs at: 2025-12-10T10:10:00Z
+*   Arrives at: 2025-12-10T16:51:00Z
+*   Total distance: 731999 meters
+*   Total duration: 24060 seconds
+
+Option 3:
+
+*   Departs from: Boston Back Bay Station
+*   Arrives at: Union Station
+*   This option is via Amtrak's Acela line and has 11 stops.
+*   Departs at: 2025-12-10T11:01:00Z
+*   Arrives at: 2025-12-10T18:00:00Z
+*   Total distance: 731995 meters
+*   Total duration: 25140 seconds
+
+Option 4:
+
+*   Departs from: Boston Back Bay Station
+*   Arrives at: Union Station
+*   This option is via Amtrak's Acela line and has 11 stops.
+*   Departs at: 2025-12-10T12:20:00Z
+*   Arrives at: 2025-12-10T18:53:00Z
+*   Total distance: 731999 meters
+*   Total duration: 23580 seconds
+
+Option 5:
+
+*   Departs from: Boston Back Bay Station
+*   Arrives at: Union Station
+*   This option is via Amtrak's Acela line and has 12 stops.
+*   Departs at: 2025-12-10T14:15:00Z
+*   Arrives at: 2025-12-10T20:58:00Z
+*   Total distance: 731999 meters
+*   Total duration: 24180 seconds
+
+Option 6:
+
+*   Departs from: Boston Back Bay Station
+*   Arrives at: Union Station
+*   This option is via Amtrak's Acela line and has 12 stops.
+*   Departs at: 2025-12-10T16:11:00Z
+*   Arrives at: 2025-12-10T22:53:00Z
+*   Total distance: 731999 meters
+*   Total duration: 24120 seconds"
+27,Initial Query,Philadelphia,Baltimore,train,2025-12-10,I want to go from Philadelphia to Baltimore by train on 2025-12-10,0.7088,4.4510,6.5256,"Here are the train options from Philadelphia to Baltimore on December 10, 2025:
+
+I found several Amtrak train options for your trip.
+
+Option 1:
+- Departs from Philadelphia at 00:11 and arrives at Baltimore - Penn Station at 01:20.
+- This journey is direct.
+- The journey covers a distance of 151293 meters and takes 4140 seconds.
+- The train is the Amtrak Acela, heading towards Washington, with 3 stops.
+- The fare is $105.
+
+Option 2:
+- Departs from Philadelphia at 00:30 and arrives at Baltimore - Penn Station at 01:41.
+- This journey is direct.
+- The journey covers a distance of 151297 meters and takes 4260 seconds.
+- The train is the Amtrak Northeast Regional, heading towards Washington, with 4 stops.
+
+Option 3:
+- Departs from Philadelphia at 00:53 and arrives at Baltimore - Penn Station at 02:00.
+- This journey is direct.
+- The journey covers a distance of 151300 meters and takes 4020 seconds.
+- The train is the Amtrak Northeast Regional, heading towards Washington, with 3 stops.
+
+Option 4:
+- Departs from Philadelphia at 01:11 and arrives at Baltimore - Penn Station at 02:16.
+- This journey is direct.
+- The journey covers a distance of 151304 meters and takes 3900 seconds.
+- The train is the Amtrak Vermonter, heading towards Washington, with 3 stops.
+
+Option 5:
+- Departs from Philadelphia at 02:11 and arrives at Baltimore - Penn Station at 03:23.
+- This journey is direct.
+- The journey covers a distance of 151300 meters and takes 4320 seconds.
+- The train is the Amtrak Northeast Regional, heading towards Washington, with 3 stops.
+- The fare is $43.
+
+Option 6:
+- Departs from Philadelphia at 02:29 and arrives at Baltimore - Penn Station at 03:42.
+- This journey is direct.
+- The journey covers a distance of 151293 meters and takes 4380 seconds.
+- The train is the Amtrak Acela, heading towards Washington, with 3 stops.
+- The fare is $55."
+28,Initial Query,Mumbai,Ahmedabad,train,2025-12-10,I want to go from Mumbai to Ahmedabad by train on 2025-12-10,1.1594,4.6207,7.1787,"Okay, here are the train options I found for your trip from Mumbai to Ahmedabad on December 10, 2025. Please note that all options involve bus travel for at least a portion of the journey.
+
+Here's a summary of the available bus options:
+
+Option 1:
+
+*   Distance: 464756 meters
+*   Duration: 37858 seconds
+*   Departure: Begins with a bus from Acharya Garden or Diamond Garden, arriving at Sanduwadi (Chembur-E).
+*   Transfer: Involves at least one transfer.
+*   Transfer point: Chembur East.
+*   Final Arrival: পালডি
+
+Option 2:
+
+*   Distance: 462765 meters
+*   Duration: 29210 seconds
+*   Departure: Begins with a bus from Omkareshwar Mandir, arriving at Vanrai or Mhada Colony.
+*   Transfer: Involves at least two transfers.
+*   Transfer points: Vanrai or Mhada Colony, Golden Chokdi.
+*   Final Arrival: CTM Char Rasta
+
+Option 3:
+
+*   Distance: 462775 meters
+*   Duration: 33710 seconds
+*   Departure: Begins with a bus from Omkareshwar Mandir, arriving at Vanrai or Mhada Colony.
+*   Transfer: Involves at least one transfer.
+*   Transfer point: Vanrai or Mhada Colony.
+*   Final Arrival: CTM Char Rasta
+
+Option 4:
+
+*   Distance: 463730 meters
+*   Duration: 36600 seconds
+*   Departure: Vile Parle E
+*   Transfer: No transfers mentioned
+*   Final Arrival: CTM Char Rasta
+
+Option 5:
+
+*   Distance: 504200 meters
+*   Duration: 32580 seconds
+*   Departure: Begins with a bus from Acharya Garden or Diamond Garden, arriving at Kamraj Nagar / R.T.O..
+*   Transfer: Involves at least three transfers.
+*   Transfer points: Ghatkopar East, দ্বারকা সার্কেল, Gandhigram Railway Station.
+*   Final Arrival: Paldi
+
+Option 6:
+
+*   Distance: 463405 meters
+*   Duration: 39327 seconds
+*   Departure: Begins with a bus from Acharya Garden or Diamond Garden, arriving at Sanduwadi (Chembur-E).
+*   Transfer: Involves at least one transfer.
+*   Transfer point: Chembur East.
+*   Final Arrival: CTM Char Rasta"
+29,Initial Query,Delhi,Mumbai,train,2025-12-10,I want to go from Delhi to Mumbai by train on 2025-12-10,0.9020,4.6433,6.8308,"Okay, here are the train options from Delhi to Mumbai for December 10, 2025, based on the available data:
+
+We found multiple options that involve a combination of metro and bus transport.
+
+**Option 1:**
+
+*   Distance: 1357851 meters
+*   Duration: 94893 seconds
+*   Transfers: 3
+*   Metro: Rohini West to Major Mohit Sharma Rajendra Nagar
+*   Bus: Rajendra Nagar to Viman Nagar, Viman Nagar Corner to Pune - Hinjewadi E, Bangur Nagar to Bahar Cinema
+
+**Option 2:**
+
+*   Distance: 1347716 meters
+*   Duration: 130384 seconds
+*   Transfers: 3
+*   Metro: Rohini West to Major Mohit Sharma Rajendra Nagar
+*   Bus: Rajendra Nagar to Yerwada, Yerwada to Dadar East, Dadar East to Vile Parle E
+
+**Option 3:**
+
+*   Distance: 1369710 meters
+*   Duration: 89719 seconds
+*   Transfers: 5
+*   Metro: Rohini West to Kashmere Gate
+*   Bus: Maharana Pratap Kashmiri Gate ISBT to Alwar, Alwar to Pratapgarh, Bharat bus - mg road opp tvs showroompratapgarh to Golden Chokdi, Golden Chokdi to Kamrej, Kamrej to Kandivali East
+
+**Option 4:**
+
+*   Distance: 1171208 meters
+*   Duration: 116559 seconds
+*   Transfers: 3
+*   Metro: Rohini West to Tis Hazari
+*   Bus: Morigate to सिन्धी कैंप, Sindhi Camp to Virar, Virar to Kandivali East
+
+**Option 5:**
+
+*   Distance: 1169238 meters
+*   Duration: 116559 seconds
+*   Transfers: 3
+*   Metro: Rohini West to Kashmere Gate
+*   Bus: Maharana Pratap Kashmiri Gate ISBT to Jaipur, Sindhi Camp to Virar, Virar to Kandivali East
+
+**Option 6:**
+
+*   Distance: 1240432 meters
+*   Duration: 128678 seconds
+*   Transfers: 4
+*   Bus: ওয়েস্ট এনক্লাভ to Super Bazar, Connaught Place to Teen Imli, Teen Imli to দ্বারকা সার্কেল, দ্বারকা সার্কেল to Goregaon, Goregaon to Kandivali East"
+30,Initial Query,Chennai,Hyderabad,train,2025-12-10,I want to go from Chennai to Hyderabad by train on 2025-12-10,0.9358,12.5952,14.8568,"Okay, I have search results for travel from Chennai to Hyderabad on December 10, 2025, focusing on train routes. While your preferred mode was train, the available options include bus segments.
+
+Here's a summary of the available transport options:
+
+Option 1:
+*   Distance: 580344 meters
+*   Duration: 47400 seconds
+*   This journey involves multiple transfers.
+*   First segment:
+    *   Departure: Thiyagaraya Nagar at 2025-12-10T10:50:00Z
+    *   Arrival: Velachery Vijayanagar at 2025-12-10T11:17:00Z
+    *   Operated by Metropolitan Transport Corporation
+    *   Vehicle type: Bus
+    *   Headsign: Sholinganallur
+*   Second segment:
+    *   Departure: Velachery Vijayanagar at 2025-12-10T11:30:00Z
+    *   Arrival: Rama Talkies at 2025-12-10T15:00:00Z
+    *   Operated by A R M T co
+    *   Vehicle type: Bus
+    *   Headsign: A/C Sleeper (2+1)
+*   Third segment:
+    *   Departure: Suryapet Bypass Bus Stop at 2025-12-10T22:15:00Z
+    *   Arrival: Ramoji Film City at 2025-12-11T00:00:00Z
+    *   Operated by zingbus
+    *   Vehicle type: Bus
+    *   Headsign: Amalapuram - Hyderabad 09:00 PM
+
+Option 2:
+*   Distance: 583330 meters
+*   Duration: 47525 seconds
+*   This journey involves multiple transfers.
+*   First segment:
+    *   Departure: Ashok Pillar at 2025-12-10T10:47:55Z
+    *   Arrival: Velachery Vijayanagar at 2025-12-10T11:24:42Z
+    *   Operated by Metropolitan Transport Corporation
+    *   Vehicle type: Bus
+    *   Headsign: Velachery Vijayanagar
+*   Second segment:
+    *   Departure: Velachery Vijayanagar at 2025-12-10T11:30:00Z
+    *   Arrival: Rama Talkies at 2025-12-10T15:00:00Z
+    *   Operated by A R M T co
+    *   Vehicle type: Bus
+    *   Headsign: A/C Sleeper (2+1)
+*   Third segment:
+    *   Departure: Suryapet Bypass Bus Stop at 2025-12-10T22:15:00Z
+    *   Arrival: Ramoji Film City at 2025-12-11T00:00:00Z
+    *   Operated by zingbus
+    *   Vehicle type: Bus
+    *   Headsign: Amalapuram - Hyderabad 09:00 PM
+
+Option 3:
+*   Distance: 596438 meters
+*   Duration: 30300 seconds
+*   This journey involves multiple transfers.
+*   First segment:
+    *   Departure: Thiyagaraya Nagar at 2025-12-10T10:50:00Z
+    *   Arrival: Velachery Vijayanagar at 2025-12-10T11:17:00Z
+    *   Operated by Metropolitan Transport Corporation
+    *   Vehicle type: Bus
+    *   Headsign: Sholinganallur
+*   Second segment:
+    *   Departure: Velachery Vijayanagar at 2025-12-10T11:30:00Z
+    *   Arrival: Rama Talkies at 2025-12-10T15:00:00Z
+    *   Operated by A R M T co
+    *   Vehicle type: Bus
+    *   Headsign: A/C Sleeper (2+1)
+*   Third segment:
+    *   Departure: Suryapet at 2025-12-10T16:30:00Z
+    *   Arrival: Hayatnagar at 2025-12-10T18:45:00Z
+    *   Operated by APSRTC
+    *   Vehicle type: Bus
+    *   Headsign: Hydernagar City Bus Stop-Metro Piller No-675
+*   Fourth segment:
+    *   Departure: Hayathnagar at 2025-12-10T19:05:00Z
+    *   Arrival: Ramoji Film City at 2025-12-10T19:15:00Z
+    *   Operated by zingbus
+    *   Vehicle type: Bus
+    *   Headsign: Hyderabad - Nellore 10:05 PM
+
+Option 4:
+*   Distance: 599424 meters
+*   Duration: 30425 seconds
+*   This journey involves multiple transfers.
+*   First segment:
+    *   Departure: Ashok Pillar at 2025-12-10T10:47:55Z
+    *   Arrival: Velachery Vijayanagar at 2025-12-10T11:24:42Z
+    *   Operated by Metropolitan Transport Corporation
+    *   Vehicle type: Bus
+    *   Headsign: Velachery Vijayanagar
+*   Second segment:
+    *   Departure: Velachery Vijayanagar at 2025-12-10T11:30:00Z
+    *   Arrival: Rama Talkies at 2025-12-10T15:00:00Z
+    *   Operated by A R M T co
+    *   Vehicle type: Bus
+    *   Headsign: A/C Sleeper (2+1)
+*   Third segment:
+    *   Departure: Suryapet at 2025-12-10T16:30:00Z
+    *   Arrival: Hayatnagar at 2025-12-10T18:45:00Z
+    *   Operated by APSRTC
+    *   Vehicle type: Bus
+    *   Headsign: Hydernagar City Bus Stop-Metro Piller No-675
+*   Fourth segment:
+    *   Departure: Hayathnagar at 2025-12-10T19:05:00Z
+    *   Arrival: Ramoji Film City at 2025-12-10T19:15:00Z
+    *   Operated by zingbus
+    *   Vehicle type: Bus
+    *   Headsign: Hyderabad - Nellore 10:05 PM
+
+Option 5:
+*   Distance: 574426 meters
+*   Duration: 30385 seconds
+*   This journey involves one transfer.
+*   First segment:
+    *   Departure: High Court at 2025-12-10T18:13:35Z
+    *   Arrival: Central at 2025-12-10T18:18:23Z
+    *   Operated by Metropolitan Transport Corporation
+    *   Vehicle type: Bus
+    *   Headsign: Poonamalli
+*   Second segment:
+    *   Departure: Central Railway Station at 2025-12-10T19:00:00Z
+    *   Arrival: Nampally Railway Station at 2025-12-11T02:40:00Z
+    *   Operated by Bharathi Travels
+    *   Vehicle type: Bus
+    *   Headsign: Scania AC Multi Axle Sleeper (2+1)
+
+Option 6:
+*   Distance: 562510 meters
+*   Duration: 39600 seconds
+*   This journey has one segment.
+*   Departure: Ashok Pillar at 2025-12-10T15:15:00Z
+*   Arrival: Nampally Railway Station at 2025-12-11T02:15:00Z
+*   Operated by Sri Krishna Travels
+*   Vehicle type: Bus
+*   Headsign: Volvo 9600 Multi-Axle A/C Sleeper (2+1)"
