@@ -15,7 +15,7 @@ def bus_node(state: State) -> Dict:
         if not origin or not destination:
             raise ValueError("Origin and destination are required")
             
-        print(f"\n🚍 Searching for buses from {origin} to {destination}...")
+        # print(f"\n🚍 Searching for buses from {origin} to {destination}...")
 
         # Convert date string to datetime object
         departure_time = datetime.strptime(state.get('date', datetime.now().strftime('%Y-%m-%d')), '%Y-%m-%d')
@@ -27,7 +27,7 @@ def bus_node(state: State) -> Dict:
             date_time=departure_time
         )
         state["bus_options"] = results  # Store just the list of routes
-        print(f"✅ Found {len(results)} bus routes")
+        # print(f"✅ Found {len(results)} bus routes")
         return {
             "bus_options": results,
             "needs_refresh": False,

@@ -15,7 +15,7 @@ def train_node(state: State) -> Dict:
         if not origin or not destination:
             raise ValueError("Origin and destination are required for train search")
             
-        print(f"\n🚆 Searching for trains from {origin} to {destination}...")
+        # print(f"\n🚆 Searching for trains from {origin} to {destination}...")
 
         # Convert date string to datetime object
         departure_time = datetime.strptime(
@@ -31,7 +31,7 @@ def train_node(state: State) -> Dict:
         )
         state["train_options"] = results  # Store just the list of routes
         
-        print(f"✅ Found {len(results)} train routes")
+        # print(f"✅ Found {len(results)} train routes")
         return {
             "train_options": results,
             "needs_refresh": False,

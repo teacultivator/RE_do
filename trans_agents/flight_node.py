@@ -11,7 +11,7 @@ def flight_node(state: State) -> Dict:
     """
 
     try:
-        print(f"\nSearching for flights from {state['origin']} to {state['destination']} on {state['date']}...")
+        # print(f"\nSearching for flights from {state['origin']} to {state['destination']} on {state['date']}...")
 
         token = get_access_token()
         results = search_flights(

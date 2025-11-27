@@ -128,6 +128,7 @@ def query_node(state: State) -> Dict[str, Any]:
             "Try to almost always infer origin_country and destination_country whenever the cities imply them and have a value for country fields for both (e.g., 'Paris' implies France). "
             "If the new message does not clearly change a field, do not include that key. "
             "Resolve relative dates like 'tomorrow' or 'next Monday' into concrete ISO dates (YYYY-MM-DD) using the current datetime. "
+            "If the user says 'ASAP', 'immediately', or 'now', use the current date (today). "
             "Return only the JSON object, no extra text."
         )
 
@@ -150,9 +151,49 @@ def query_node(state: State) -> Dict[str, Any]:
                     changes[key] = value
 
         if changes:
+            # --- VALIDATION LOGIC START ---
+            
+            # 1. Validate Date (Reject Past Dates)
+            if "date" in changes and changes["date"]:
+                try:
+                    input_date_str = changes["date"]
+                    input_date = datetime.strptime(input_date_str, "%Y-%m-%d").date()
+                    current_date = datetime.now().date()
+                    
+                    if input_date < current_date:
+                        # Reject past date
+                        print(f"Validation Error: Date {input_date_str} is in the past.")
+                        # We can either clear it or not update it. Let's not update it.
+                        if "date" in changes:
+                            del changes["date"]
+                        # Optionally, we could add a system message to warn the user, 
+                        # but for now, ignoring the update will force the system to ask again 
+                        # or keep the old valid date.
+                except ValueError:
+                    # Date format error, ignore or handle gracefully
+                    pass
+
+            # 2. Validate Origin == Destination
+            # We need to check the prospective state (current state + changes)
+            prospective_origin = changes.get("origin") or snapshot.get("origin")
+            prospective_dest = changes.get("destination") or snapshot.get("destination")
+            
+            if prospective_origin and prospective_dest:
+                if prospective_origin.lower().strip() == prospective_dest.lower().strip():
+                    print(f"Validation Error: Origin and Destination are the same ({prospective_origin}).")
+                    # Clear the destination in the updates to force a re-ask
+                    changes["destination"] = None
+                    # Also ensure we don't keep the old destination if it was the same
+                    if "destination" not in changes:
+                        changes["destination"] = None
+            
+            # --- VALIDATION LOGIC END ---
+
             updates.update(changes)
             prospective_state = dict(snapshot)
+            # Apply changes again after validation modifications
             prospective_state.update(changes)
+            
             missing_after_update = _missing_required_fields(prospective_state)
             missing_only_mode = len(missing_after_update) == 1 and missing_after_update[0] == "transport_mode"
             updates["needs_refresh"] = _is_state_complete(prospective_state) or missing_only_mode

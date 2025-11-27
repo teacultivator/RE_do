@@ -105,7 +105,8 @@ def result_analysis_node(state: State) -> Dict:
         "Provide a clear, concise, and helpful response based on the available data. "
         "If the user asks for something that requires specific data not available in the results, "
         "politely explain what information is missing.\n\n"
-        "Return only your analysis/response text, no JSON or code blocks."
+        "Return only your analysis/response text, no JSON or code blocks.\n"
+        "DO NOT use markdown formatting like **bold** or *italic*. Use plain text only."
     )
     
     try:

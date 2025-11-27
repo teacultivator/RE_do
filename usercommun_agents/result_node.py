@@ -7,6 +7,7 @@ import google.generativeai as genai
 from langchain_core.messages import AIMessage, HumanMessage, BaseMessage
 
 from graph.state import State
+from trans_agents.API_helper import simplify_flight_data
 
 # Debug flag - set to False to disable debug prints
 DEBUG_MODE = False
@@ -93,12 +94,15 @@ def result_node(state: State) -> Dict:
             reply = (
                 f"I found {len(flight_options)} flight(s), {len(bus_options)} bus(es), "
                 f"and {len(train_options)} train(s) available. "
-                f"Here are the results:\n\n"
-                f"{json.dumps({'flights': flight_options, 'buses': bus_options, 'trains': train_options}, ensure_ascii=False, indent=2)}"
+                f"(Error: {str(e)}) "
             )
     else:
-        # No results yet but all fields are complete
-        reply = clarify_text
+        # No results found, but we have all required fields
+        reply = (
+            f"I searched for {mode} options from {state.get('origin')} to {state.get('destination')} "
+            f"on {state.get('date')}, but unfortunately, I couldn't find any available results. "
+            "Please try a different date, transport mode, or route."
+        )
 
     return {"messages": [AIMessage(content=reply)]}
 
@@ -118,36 +122,63 @@ def _format_transport_results(
     # Prepare the data for LLM analysis
     transport_data = {}
     if flight_options:
-        transport_data["flights"] = flight_options
+        # Simplify flight data to reduce token usage and avoid errors
+        transport_data["flights"] = simplify_flight_data(flight_options)
     if bus_options:
         transport_data["buses"] = bus_options
     if train_options:
         transport_data["trains"] = train_options
+    user_needs = state_view.get("needs", "None")
+
     prompt = (
-        f"You are a helpful travel assistant presenting search results to a user.\n\n"
+        f"You are a highly professional and efficient travel agent assistant. Your goal is to present search results clearly, concisely, and helpfully.\n\n"
         f"Search Request:\n"
         f"- Origin: {search_info['origin']}\n"
         f"- Destination: {search_info['destination']}\n"
         f"- Date: {search_info['date']}\n"
-        f"- Preferred transport mode: {search_info['transport_mode']}\n\n"
+        f"- Preferred transport mode: {search_info['transport_mode']}\n"
+        f"- User Preferences/Needs: {user_needs}\n\n"
+        
+        f"FEW-SHOT EXAMPLES:\n"
+        f"Example 1 (Specific Preference - Cheapest):\n"
+        f"User Needs: 'cheapest flight'\n"
+        f"Data: [Flight A ($100, 5h), Flight B ($200, 2h)]\n"
+        f"Output:\n"
+        f"I found the best option for you based on price:\n\n"
+        f"- **Best Match (Cheapest):** Flight A is the most affordable at $100.\n"
+        f"  - Departs: 10:00 AM | Arrives: 3:00 PM\n"
+        f"  - Duration: 5h\n\n"
+        f"If you prefer a faster trip, Flight B takes only 2h but costs $200.\n\n"
+        
+        f"Example 2 (General Search - Deduplication):\n"
+        f"User Needs: 'None'\n"
+        f"Data: [Flight A ($150, 2h) - Cheapest & Fastest, Flight B ($200, 3h)]\n"
+        f"Output:\n"
+        f"Here are the best options for your trip:\n\n"
+        f"- **Top Pick (Cheapest & Fastest):** Flight A is the clear winner at $150 and only 2h duration.\n"
+        f"  - Departs: 08:00 AM | Arrives: 10:00 AM\n"
+        f"  - Carrier: BA\n\n"
+        f"- **Alternative:** Flight B is available for $200 if the timing suits you better.\n"
+        f"  - Departs: 12:00 PM | Arrives: 3:00 PM\n\n"
+
         f"Available Transport Options (JSON format):\n"
         f"{json.dumps(transport_data, ensure_ascii=False, indent=2)}\n\n"
-        f"Please analyze these results and provide a clear recommendation focusing only on the available information.\n"
-        f"1. Brief introduction with search details\n"
-        f"2. Summary of available transport options\n"
-        f"3. For each recommended option, include only the available information from these categories:\n"
-        f"   - Departure and arrival stations\n"
-        f"   - Transfer details (number of transfers, transfer points)\n"
-        f"   - Distance and duration\n"
-        f"   - Any other relevant journey details\n\n"
-        f"Important guidelines:\n"
-        f"- if a value is 0.0 try not to mention it \n"
-        f"- Only mention information that is actually available in the data\n"
-        f"- Do not mention or call out any missing information\n"
-        f"- Keep the output clean and focused only on the available details\n"
-        f"- Use simple, clear language without markdown formatting\n"
-        f"- For multi-segment journeys, describe each segment with available details\n"
-        f"- Return plain text only, no JSON or code blocks"
+        f"Please analyze these results and provide a clear recommendation.\n"
+        f"CRITICAL INSTRUCTIONS:\n"
+        f"1. **Deduplication:** If an option fits multiple categories (e.g., it is BOTH the cheapest and the fastest), mention it ONLY ONCE. Tag it with multiple attributes (e.g., 'Cheapest & Fastest'). DO NOT list the same option twice.\n"
+        f"2. **Sorting:**\n"
+        f"   - If the user has a preference (e.g., 'cheapest'), put that option FIRST.\n"
+        f"   - If no preference, prioritize a balance of Price and Duration.\n"
+        f"3. **Structure:**\n"
+        f"   - Start with a polite, 1-sentence summary.\n"
+        f"   - Use bullet points for options.\n"
+        f"   - For each option, clearly state WHY you recommended it (e.g., 'Cheapest', 'Fastest', 'Balanced').\n"
+        f"   - Include key details: Price, Duration, Departure/Arrival Times, Carrier/Agency.\n"
+        f"4. **Tone:** Professional, concise, and helpful. Avoid robotic repetition.\n"
+        f"5. **Formatting:**\n"
+        f"   - Do NOT use markdown bold/italic (no ** or *). Use plain text capitalization or labels like 'Option 1:' instead.\n"
+        f"   - Use clean spacing.\n"
+        f"   - Return PLAIN TEXT only."
     )
     
     response = _model.generate_content(prompt)

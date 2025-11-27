@@ -16,7 +16,7 @@ except Exception:
 API_KEY = os.getenv("AMADEUS_API_KEY")
 API_SECRET = os.getenv("AMADEUS_API_SECRET")
 
-print(API_KEY, API_SECRET)
+# print(API_KEY, API_SECRET)
 
 ACCESS_TOKEN = None
 TOKEN_EXPIRY = 0
@@ -79,7 +79,7 @@ def search_flights(origin_city: str, origin_country:str ,destination_city: str, 
     """
 
     codes = model.generate_content(prompt1).text
-    print(codes)
+    # print(codes)
     codes_clean = codes.strip()
     if codes_clean.startswith("```"):
         lines = codes_clean.splitlines()
@@ -110,13 +110,13 @@ def search_flights(origin_city: str, origin_country:str ,destination_city: str, 
         }
         url = "https://test.api.amadeus.com/v2/shopping/flight-offers"
         
-        print("Parameters before API call:",params,sep='\n')
+        # print("Parameters before API call:",params,sep='\n')
         headers = {"Authorization": f"Bearer {token}"}
         response = requests.get(url, params=params, headers=headers, timeout=90)
 
 
         result = response.json()
-        print("Number of flight offers returned by Amadeus:", len(result["data"]), end="\n\n")
+        #print("Number of flight offers returned by Amadeus:", len(result["data"]), end="\n\n")
 
         if response.status_code != 200:
             error_msg = "Unknown API error"
@@ -206,8 +206,8 @@ def get_buses_from_api(origin: str, destination: str, date_time: datetime) -> li
         "computeAlternativeRoutes": True,
     }
     
-    print(f"🚌 Fetching buses: {origin} → {destination}")
-    print(f"⏰ Departure time: {date_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    # print(f"🚌 Fetching buses: {origin} → {destination}")
+    # print(f"⏰ Departure time: {date_time.strftime('%Y-%m-%d %H:%M:%S')}")
     
     try:
         response = requests.post(url, headers=headers, json=payload, timeout=(10, 30))
@@ -265,8 +265,8 @@ def get_trains_from_api(origin: str, destination: str, date_time: datetime) -> l
         "computeAlternativeRoutes": True,
     }
     
-    print(f"🚆 Fetching trains: {origin} → {destination}")
-    print(f"⏰ Departure time: {date_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    # print(f"🚆 Fetching trains: {origin} → {destination}")
+    # print(f"⏰ Departure time: {date_time.strftime('%Y-%m-%d %H:%M:%S')}")
     
     try:
         response = requests.post(url, headers=headers, json=payload, timeout=(10, 30))
@@ -288,3 +288,55 @@ def get_trains_from_api(origin: str, destination: str, date_time: datetime) -> l
             raise ConnectionError(f"⚠️ API error: HTTP {e.response.status_code} - {error_msg}")
     except Exception as e:
         raise Exception(f"❌ Error fetching train routes: {str(e)}")
+
+
+def simplify_flight_data(flight_offers: list) -> list:
+    """
+    Simplifies the raw Amadeus flight offers into a cleaner format for the LLM.
+    Extracts only essential details: price, duration, and segment info.
+    """
+    simplified = []
+    
+    for offer in flight_offers:
+        try:
+            # Extract price
+            price = offer.get("price", {})
+            total_price = f"{price.get('total', 'N/A')} {price.get('currency', '')}"
+            
+            # Extract itineraries
+            itineraries = []
+            for itinerary in offer.get("itineraries", []):
+                segments = []
+                for segment in itinerary.get("segments", []):
+                    seg_info = {
+                        "departure": {
+                            "iata": segment.get("departure", {}).get("iataCode"),
+                            "time": segment.get("departure", {}).get("at")
+                        },
+                        "arrival": {
+                            "iata": segment.get("arrival", {}).get("iataCode"),
+                            "time": segment.get("arrival", {}).get("at")
+                        },
+                        "carrier": segment.get("carrierCode"),
+                        "flight_number": segment.get("number"),
+                        "duration": segment.get("duration")
+                    }
+                    segments.append(seg_info)
+                
+                itineraries.append({
+                    "duration": itinerary.get("duration"),
+                    "segments": segments
+                })
+            
+            simplified.append({
+                "id": offer.get("id"),
+                "price": total_price,
+                "itineraries": itineraries,
+                "seats_available": offer.get("numberOfBookableSeats")
+            })
+            
+        except Exception as e:
+            print(f"Error simplifying flight offer {offer.get('id', 'unknown')}: {e}")
+            continue
+            
+    return simplified
