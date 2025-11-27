@@ -178,7 +178,13 @@ def _format_transport_results(
         f"5. **Formatting:**\n"
         f"   - Do NOT use markdown bold/italic (no ** or *). Use plain text capitalization or labels like 'Option 1:' instead.\n"
         f"   - Use clean spacing.\n"
-        f"   - Return PLAIN TEXT only."
+        f"   - Return PLAIN TEXT only.\n"
+        f"6. **Mixed Results Handling (CRITICAL):**\n"
+        f"   - Check the 'Preferred transport mode' in the Search Request.\n"
+        f"   - Check the keys in 'Available Transport Options' (e.g., 'flights', 'buses', 'trains').\n"
+        f"   - If the user asked for 'Train' but the JSON data ONLY contains 'buses' (or other non-train transport modes like Metro, Bus, etc.), you MUST start your response with: 'I couldn't find any train options for this route, but I found other transport options:'\n"
+        f"   - DO NOT label a Bus option as a 'Train' option. If the data says 'bus', call it a Bus.\n"
+        f"   - If the data contains mixed legs (e.g., Metro + Bus), describe it as a 'Multi-leg journey involving Metro and Bus', do NOT call it a 'Train' unless there is an actual train leg."
     )
     
     response = _model.generate_content(prompt)
