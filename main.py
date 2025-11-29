@@ -1,6 +1,3 @@
-import dotenv
-dotenv.load_dotenv()
-
 from langchain_core.messages import HumanMessage
 from graph.builder import build_graph
 
