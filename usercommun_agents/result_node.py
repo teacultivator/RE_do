@@ -172,7 +172,7 @@ def _format_transport_results(
         f"3. Structure:\n"
         f"   - Start with a polite, 1-sentence summary.\n"
         f"   - Use bullet points for options.\n"
-        f"   - For each option, clearly state WHY you recommended it (e.g., 'Cheapest', 'Fastest', 'Balanced').\n"
+        f"   - For each option(No need to state all options given ), clearly state WHY you recommended it (e.g., 'Cheapest', 'Fastest', 'Balanced').\n"
         f"   - Include key details: Price, Duration, Departure/Arrival Times, Carrier/Agency.\n"
         f"4. Tone: Professional, concise, and helpful. Avoid robotic repetition.\n"
         f"5. Formatting:\n"
